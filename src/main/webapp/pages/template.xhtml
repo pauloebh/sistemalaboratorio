@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:loadBundle basename="mensagens" var="msgs" />
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8;" />
+	<title><h:outputText value="#{msgs['titulo.sistema']}" /></title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logo.jpg" id="logoCompany" />
+	</div>
+	<div id="conteudo">
+		<h:form id="menuBar">
+			<p:menubar styleClass="menunav">
+				<p:submenu label="#{msgs['template.menu.adm.administracao']}">
+					<p:menuitem value="#{msgs['template.menu.adm.manual']}" url="#" />
+					<p:separator />
+					<p:menuitem value="#{msgs['template.menu.adm.novousuario']}"
+						url="/pages/adm/cadUsuario.jsf" icon="ui-icon-document" />
+					<p:menuitem value="#{msgs['template.menu.adm.consultausuario']}"
+						url="/pages/adm/listaUsuarios.jsf" icon="ui-icon-search" />
+					<p:separator />
+					<p:menuitem value="#{msgs['template.menu.adm.perfilnovo']}"
+						url="/pages/adm/cadPerfil.jsf" icon="ui-icon-document" />
+
+					<p:menuitem value="#{msgs['template.menu.adm.consultaperfil']}"
+						url="/pages/adm/listaPerfils.jsf" icon="ui-icon-search" />
+				<p:separator />
+				<p:menuitem value="#{msgs['template.menu.adm.clientenovo']}"
+					url="/pages/adm/cadCliente.jsf" icon="ui-icon-document" />
+
+				<p:menuitem value="#{msgs['template.menu.adm.consultacliente']}"
+					url="/pages/adm/listaClientes.jsf" icon="ui-icon-search" />
+				</p:submenu>
+				
+				<p:menuitem value="#{msgs['template.menu.adm.alterasenha']}"
+					action="#{loginController.preparaAlteracaoSenha}" ajax="false"
+					icon="ui-icon-wrench" />
+				<p:menuitem value="#{msgs['template.menu.adm.sair']}"
+					action="#{loginController.logOut}" ajax="false"
+					icon="ui-icon-close" />
+				<p:menuitem
+					value="#{msgs['header.label.logadocomo']} #{usuarioLogado.nome}"
+					disabled="true" />
+
+			</p:menubar>
+		</h:form>
+		<ui:insert name="corpo" />
+	</div>
+	<div id="rodape">#{msgs['sistema.label.titulo']}</div>
+</h:body>
+</html>
