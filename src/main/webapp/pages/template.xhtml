@@ -24,32 +24,34 @@
 			<p:menubar styleClass="menunav">
 				
 				<p:menuitem value="#{msgs['template.menu.adm.notificacoes']}"
-					url="/pages/construcao.jsf" />
+					url="/pages/notificacao/notificacoes.jsf" />
 				
 				<p:submenu label="#{msgs['template.menu.adm.analises']}">
 					
 					<p:menuitem value="#{msgs['template.menu.adm.novasolicitacao']}"
-						url="/pages/construcao.jsf" icon="ui-icon-document" />
+						url="/pages/analises/novasolicitacao.jsf" icon="ui-icon-document" />
 					<p:menuitem value="#{msgs['template.menu.adm.consultaranalises']}"
-						url="/pages/construcao.jsf" icon="ui-icon-search" />
+						url="/pages/analises/consultaranalises.jsf" icon="ui-icon-search" />
 
 				</p:submenu>
 				
 				<p:submenu label="#{msgs['template.menu.adm.administracao']}">
 				
 					<p:menuitem value="#{msgs['template.menu.adm.manual']}" 
-						url="/pages/construcao.jsf" icon="ui-icon-document" />
+						url="/pages/manual.jsf" icon="ui-icon-document" />
 					<p:separator />
 					<p:menuitem value="#{msgs['template.menu.adm.clientes']}"
-						url="/pages/adm/listaClientes.jsf" icon="ui-icon-document" />
+						url="/pages/adm/listaClientes.jsf" icon="ui-icon-search" />
 					<p:menuitem value="#{msgs['template.menu.adm.usuarios']}"
 						url="/pages/adm/listaUsuarios.jsf" icon="ui-icon-search" />
 					<p:menuitem value="#{msgs['template.menu.adm.microrganismos']}"
-						url="/pages/construcao.jsf" icon="ui-icon-search" />
-					<p:menuitem value="#{msgs['template.menu.adm.configuracoes']}"
-						url="/pages/construcao.jsf" icon="ui-icon-search" />
+						url="/pages/adm/listaMicrorganismos.jsf" icon="ui-icon-search" />
+					<p:separator />
 					<p:menuitem value="#{msgs['template.menu.adm.indicadores']}"
-						url="/pages/construcao.jsf" icon="ui-icon-document" />
+						url="/pages/adm/indicadores.jsf" icon="ui-icon-search" />
+					<p:separator />	
+					<p:menuitem value="#{msgs['template.menu.adm.configuracoes']}"
+						url="/pages/adm/configuracoes.jsf" icon="ui-icon-wrench" />
 					
 				</p:submenu>
 				
