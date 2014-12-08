@@ -22,37 +22,48 @@
 	<div id="conteudo">
 		<h:form id="menuBar">
 			<p:menubar styleClass="menunav">
-				<p:submenu label="#{msgs['template.menu.adm.administracao']}">
-					<p:menuitem value="#{msgs['template.menu.adm.manual']}" url="#" />
-					<p:separator />
-					<p:menuitem value="#{msgs['template.menu.adm.novousuario']}"
-						url="/pages/adm/cadUsuario.jsf" icon="ui-icon-document" />
-					<p:menuitem value="#{msgs['template.menu.adm.consultausuario']}"
-						url="/pages/adm/listaUsuarios.jsf" icon="ui-icon-search" />
-					<p:separator />
-					<p:menuitem value="#{msgs['template.menu.adm.perfilnovo']}"
-						url="/pages/adm/cadPerfil.jsf" icon="ui-icon-document" />
+				
+				<p:menuitem value="#{msgs['template.menu.adm.notificacoes']}"
+					url="/pages/construcao.jsf" />
+				
+				<p:submenu label="#{msgs['template.menu.adm.analises']}">
+					
+					<p:menuitem value="#{msgs['template.menu.adm.novasolicitacao']}"
+						url="/pages/construcao.jsf" icon="ui-icon-document" />
+					<p:menuitem value="#{msgs['template.menu.adm.consultaranalises']}"
+						url="/pages/construcao.jsf" icon="ui-icon-search" />
 
-					<p:menuitem value="#{msgs['template.menu.adm.consultaperfil']}"
-						url="/pages/adm/listaPerfils.jsf" icon="ui-icon-search" />
-				<p:separator />
-				<p:menuitem value="#{msgs['template.menu.adm.clientenovo']}"
-					url="/pages/adm/cadCliente.jsf" icon="ui-icon-document" />
-
-				<p:menuitem value="#{msgs['template.menu.adm.consultacliente']}"
-					url="/pages/adm/listaClientes.jsf" icon="ui-icon-search" />
 				</p:submenu>
 				
-				<p:menuitem value="#{msgs['template.menu.adm.alterasenha']}"
+				<p:submenu label="#{msgs['template.menu.adm.administracao']}">
+				
+					<p:menuitem value="#{msgs['template.menu.adm.manual']}" 
+						url="/pages/construcao.jsf" icon="ui-icon-document" />
+					<p:separator />
+					<p:menuitem value="#{msgs['template.menu.adm.clientes']}"
+						url="/pages/adm/listaClientes.jsf" icon="ui-icon-document" />
+					<p:menuitem value="#{msgs['template.menu.adm.usuarios']}"
+						url="/pages/adm/listaUsuarios.jsf" icon="ui-icon-search" />
+					<p:menuitem value="#{msgs['template.menu.adm.microrganismos']}"
+						url="/pages/construcao.jsf" icon="ui-icon-search" />
+					<p:menuitem value="#{msgs['template.menu.adm.configuracoes']}"
+						url="/pages/construcao.jsf" icon="ui-icon-search" />
+					<p:menuitem value="#{msgs['template.menu.adm.indicadores']}"
+						url="/pages/construcao.jsf" icon="ui-icon-document" />
+					
+				</p:submenu>
+				
+				<p:menuitem value="#{msgs['template.menu.adm.alterardados']}"
 					action="#{loginController.preparaAlteracaoSenha}" ajax="false"
 					icon="ui-icon-wrench" />
-				<p:menuitem value="#{msgs['template.menu.adm.sair']}"
-					action="#{loginController.logOut}" ajax="false"
-					icon="ui-icon-close" />
+				
 				<p:menuitem
 					value="#{msgs['header.label.logadocomo']} #{usuarioLogado.nome}"
 					disabled="true" />
-
+				
+				<p:menuitem value="#{msgs['template.menu.adm.sair']}"
+					action="#{loginController.logOut}" ajax="false"
+					icon="ui-icon-close" />
 			</p:menubar>
 		</h:form>
 		<ui:insert name="corpo" />
