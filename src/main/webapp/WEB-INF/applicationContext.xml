@@ -11,18 +11,19 @@
        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
                         
 
-	<!-- Service Declaration -->
-    <bean id="UserService" class="com.service.UserService">
-        <property name="UserDAO" ref="UserDaoImpl" />
-    </bean>
 
     <!-- DAO Declaration -->
-    <bean id="dao" class="com.dao.Dao" abstract="true" >
+    <bean id="abstractDao" class="com.dao.AbstractDaoImpl" abstract="true" >
         <property name="sessionFactory" ref="mySessionFactory" />
     </bean>
 
-    <bean id="UserDaoImpl" class="com.dao.impl.UserDaoImpl" parent="dao" />
-
+    <bean id="UserDaoImpl" class="com.dao.impl.UserDaoImpl" parent="abstractDao" >
+    </bean>
+    
+	<!-- Service Declaration -->
+    <bean id="UserService" class="com.service.UserService">
+        <property name="userDAO" ref="UserDaoImpl" />
+    </bean>
 
 	<!-- ManagedBeans -->
 	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request">

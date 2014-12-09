@@ -12,8 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "userController")
-@RequestScoped
 public class UserMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +24,6 @@ public class UserMB implements Serializable {
     private List<SelectItem> funcaoList;
 	private List<User> userList;
 
-	@ManagedProperty(value = "#{UserService}")
     private IUserService userService;
 
 	public UserMB(IUserService userService) {

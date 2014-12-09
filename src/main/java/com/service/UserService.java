@@ -18,7 +18,6 @@ public class UserService implements IUserService,Serializable {
     public IUserDao userDAO;
     
     public UserService () {
-    	setUserDAO(new UserDaoImpl());
     }
 
     @Transactional(readOnly = false)
