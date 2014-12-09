@@ -15,7 +15,7 @@
 	
 		<!-- configuration of navigation rules -->	
 	<navigation-rule>
-	    <from-view-id>/pages/adm/cadUsuario.xhtml</from-view-id> 
+	    <from-view-id>/pages/adm/formUsuario.xhtml</from-view-id> 
 	    <navigation-case>
 	        <from-outcome>cadUser</from-outcome>
             <to-view-id>/pages/adm/listaUsuarios.xhtml</to-view-id>
@@ -27,7 +27,7 @@
 	    <from-view-id>/pages/adm/listaUsuarios.xhtml</from-view-id> 
 	    <navigation-case>
 	        <from-outcome>editUsuer</from-outcome>
-            <to-view-id>/pages/adm/cadUsuario.xhtml</to-view-id>
+            <to-view-id>/pages/adm/formUsuario.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
