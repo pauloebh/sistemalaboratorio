@@ -4,7 +4,7 @@ import com.model.User;
 
 import java.util.List;
 
-public interface IUserDao extends AbstractDao<User> {
+public interface IUserDao extends InterfaceDao<User> {
  
     public User recuperar(User user);
     public User recuperarPorCpf(User user);

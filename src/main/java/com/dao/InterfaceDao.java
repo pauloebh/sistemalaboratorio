@@ -2,7 +2,7 @@ package com.dao;
 
 import java.io.Serializable;
  
-public interface AbstractDao<T> {
+public interface InterfaceDao<T> {
     T recuperar(Serializable id);
     T adicionar(T t);
     T atualizar(T t);

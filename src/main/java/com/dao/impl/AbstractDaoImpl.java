@@ -1,13 +1,13 @@
 package com.dao.impl;
 
-import com.dao.AbstractDao;
+import com.dao.InterfaceDao;
 
 import java.io.Serializable;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
+public abstract class AbstractDaoImpl<T> implements InterfaceDao<T> {
 
     protected abstract Class<T> getEntityClass();
 
