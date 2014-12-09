@@ -19,6 +19,7 @@ public class UserMB implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String SUCCESS = "cadUser";
     private static final String EDIT = "editUsuer";
+    private static final String LISTA = "listaUsuarios";
 
     private User user;
     
@@ -39,15 +40,23 @@ public class UserMB implements Serializable {
         return strCpf.replace(".","").replace("-", "").substring(0, 5);
     }
 
-
+    public void limpar(){
+    	//falta 
+    }
+    
+    public String newUser() {
+    	if (getUser() == null)
+    		setUser(new User());
+    		return SUCCESS;
+    }
+    
     public String addUser() {
-
-
+	
         // se o usuario existir atualiza
         if (getUser().getUserId() != 0) {
             // selecaoToPerfilEnum(this.user);
             getUserService().updateUser(getUser());
-            return SUCCESS;
+            return LISTA;
             // valida se existe p/adicionar
         } else if (!getUserService().isExiteUser(getUser())) {
 
@@ -57,7 +66,7 @@ public class UserMB implements Serializable {
 
             // /selecaoToPerfilEnum(this.user);
             getUserService().addUser(getUser());
-            return SUCCESS;
+            return LISTA;
         } else {
             Message.addMessage("cadastroUsuario.existente");
             return null;
@@ -79,6 +88,10 @@ public class UserMB implements Serializable {
         return EDIT;
     }
 
+    public String listaUsuarios() {
+    	return LISTA;
+    }
+    
     public String getLabelCadastro() {
         if (getUser().getUserId() == 0) {
             return Message.getBundleMessage("cadastroUsuario.label.titulo");

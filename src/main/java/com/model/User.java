@@ -36,6 +36,10 @@ public class User implements Serializable {
 	@Column(name = "ativo")
 	private boolean ativo;
 
+	public User () {
+		
+	}
+	
 	public boolean getAtivo() {
 		return ativo;
 	}
