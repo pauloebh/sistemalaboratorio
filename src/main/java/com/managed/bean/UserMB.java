@@ -12,27 +12,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "userMB")
+@ManagedBean(name = "userController")
 @RequestScoped
-public class UserManagedBean implements Serializable {
+public class UserMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final String SUCCESS = "cadUser";
     private static final String EDIT = "editUsuer";
 
     private User user;
+    
+    private List<SelectItem> funcaoList;
+	private List<User> userList;
 
-    @ManagedProperty(value = "#{UserService}")
-    IUserService userService;
+	@ManagedProperty(value = "#{UserService}")
+    private IUserService userService;
 
-    public UserManagedBean() {
-        if (this.user == null) {
-            this.user = new User();
-        }
-
+	public UserMB() {
+		setUser(new User());
         // montaPerfilList();
     }
-
 
     private String getDefaultPassword(String strCpf){
         //Senha default  composto pelos 5 primeiros numeros do CPF
@@ -44,19 +43,19 @@ public class UserManagedBean implements Serializable {
 
 
         // se o usuario existir atualiza
-        if (this.user.getUserId() != 0) {
+        if (getUser().getUserId() != 0) {
             // selecaoToPerfilEnum(this.user);
-            userService.updateUser(this.user);
+            getUserService().updateUser(getUser());
             return SUCCESS;
             // valida se existe p/adicionar
-        } else if (!userService.isExiteUser(this.user)) {
+        } else if (!getUserService().isExiteUser(getUser())) {
 
-            if (this.user.getSenha() == null) {
-                this.user.setSenha(getDefaultPassword(this.user.getCpf()));
+            if (getUser().getSenha() == null) {
+                getUser().setSenha(getDefaultPassword(getUser().getCpf()));
             }
 
             // /selecaoToPerfilEnum(this.user);
-            userService.addUser(this.user);
+            getUserService().addUser(getUser());
             return SUCCESS;
         } else {
             Message.addMessage("cadastroUsuario.existente");
@@ -64,26 +63,23 @@ public class UserManagedBean implements Serializable {
         }
     }
 
-    List<SelectItem> perfilList;
-    List<User> userList;
-
     public String deleteUser(User user) {
-        userService.deleteUser(user);
+        getUserService().deleteUser(user);
         return null;
     }
 
     public String updateUser(User user) {
-        userService.updateUser(user);
+        getUserService().updateUser(user);
         return SUCCESS;
     }
 
     public String editUser(User user) {
-        this.user = user;
+        setUser(user);
         return EDIT;
     }
 
     public String getLabelCadastro() {
-        if (this.user.getUserId() == 0) {
+        if (getUser().getUserId() == 0) {
             return Message.getBundleMessage("cadastroUsuario.label.titulo");
         } else {
             return Message
@@ -91,25 +87,41 @@ public class UserManagedBean implements Serializable {
         }
     }
 
+    public void reset() {
+        setUser(new User());
+    }
+    
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void reset() {
-        this.user = new User();
-    }
-
     public List<User> getUserList() {
-        userList = new ArrayList<User>();
-        userList.addAll(userService.getUsers());
+        this.userList = new ArrayList<User>();
+        this.userList.addAll(getUserService().getUsers());
         return userList;
     }
 
+    public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+    
+    public IUserService getUserService() {
+		return this.userService;
+	}
+    
     public void setUserService(IUserService userService) {
         this.userService = userService;
     }
+    
+    public List<SelectItem> getFuncaoList() {
+		return funcaoList;
+	}
+
+	public void setFuncaoList(List<SelectItem> funcaoList) {
+		this.funcaoList = funcaoList;
+	}
 }

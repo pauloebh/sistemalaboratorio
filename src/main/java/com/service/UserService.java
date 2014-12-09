@@ -1,7 +1,9 @@
 package com.service;
 
 import com.dao.IUserDao;
+import com.dao.impl.UserDaoImpl;
 import com.model.User;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -14,6 +16,10 @@ public class UserService implements IUserService,Serializable {
     private static final long serialVersionUID = 1L;
 
     public IUserDao userDAO;
+    
+    public UserService () {
+    	setUserDAO(new UserDaoImpl());
+    }
 
     @Transactional(readOnly = false)
     public void addUser(User user) {

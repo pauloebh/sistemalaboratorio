@@ -22,11 +22,11 @@
 
 
 	<!-- ManagedBeans -->
-	<bean id="loginController" class="com.managed.bean.LoginBean" 	scope="request">
+	<bean id="loginController" class="com.managed.bean.LoginMB" 	scope="request">
 		<constructor-arg ref="UserService" />
 	</bean>
 
-	<bean id="userMB" class="com.managed.bean.UserManagedBean" scope="request">
+	<bean id="userMB" class="com.managed.bean.UserMB" scope="request">
 		<constructor-arg ref="UserService" />
 	</bean>
 

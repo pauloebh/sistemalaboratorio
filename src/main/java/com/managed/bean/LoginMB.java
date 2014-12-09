@@ -10,7 +10,7 @@ import com.service.IUserService;
 import com.util.JsfUtil;
 import com.util.Message;
 
-public class LoginBean implements Serializable {
+public class LoginMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,17 +22,23 @@ public class LoginBean implements Serializable {
 	private String senhaNova;
 	private String confirmaSenhaNova;
 
+	private IUserService userService;
 
-	IUserService userService;
-
-	public LoginBean(IUserService userService) {
-		this.userService = userService;
-		this.user = new User();
+	public LoginMB(IUserService userService) {
+		setUserService(userService);
+		setUser(new User());
+	}
+	
+	public IUserService getUserService() {
+		return this.userService;
 	}
 
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
 
 	public String getConfirmaSenhaNova() {
-		return confirmaSenhaNova;
+		return this.confirmaSenhaNova;
 	}
 
 	public void setConfirmaSenhaNova(String confirmaSenhaNova) {
@@ -40,7 +46,7 @@ public class LoginBean implements Serializable {
 	}
 
 	public String getSenhaNova() {
-		return senhaNova;
+		return this.senhaNova;
 	}
 
 	public void setSenhaNova(String senhaNova) {
@@ -60,21 +66,21 @@ public class LoginBean implements Serializable {
 	}
 
 	public String efetuaLogin() {
-		if (user.getEmail() == null || user.getSenha() == null) {
+		if (getUser().getEmail() == null || getUser().getSenha() == null) {
 			Message.addMessage("login.userEpassw.required");
 			return null;
 		}
 
-		if (userService.buscaPorLogin(this.user)) {
+		if (getUserService().buscaPorLogin(getUser())) {
 
-            this.user = userService.getUserByEmail(this.user);
+            setUser(getUserService().getUserByEmail(getUser()));
 
-			JsfUtil.setSessionValue(USUARIO_LOGADO, this.user);
+			JsfUtil.setSessionValue(USUARIO_LOGADO, getUser());
 
 			// verifica se contem 5 caracteres conforme a senha default
-			if (this.user.getSenha().length() == 5) {
-				if (this.user.getSenha().equals(
-						this.user.getSenha().replace(".", "").replace("-", "")
+			if (getUser().getSenha().length() == 5) {
+				if (getUser().getSenha().equals(
+						getUser().getSenha().replace(".", "").replace("-", "")
 						.substring(0, 5))) {
 					Message.addMessageConfig("cadastroUsuario.senha.senhaDefault");
 					return REDIRECT_TROCA_SENHA;
@@ -97,7 +103,7 @@ public class LoginBean implements Serializable {
 
 	public String alteraSenha() {
 
-		if (this.user.getSenha() == "") {
+		if (getUser().getSenha() == "") {
 			Message.addMessage("login.passw.atual");
 			return null;
 		} else if (userService.buscaPorLogin(this.user) ) {
@@ -113,8 +119,8 @@ public class LoginBean implements Serializable {
 			Message.addMessage("login.passw.confirmError");
 			return null;
 		} else {
-			user.setSenha(getSenhaNova());
-			userService.updateUser(this.user);
+			getUser().setSenha(getSenhaNova());
+			getUserService().updateUser(getUser());
 			Message.addMessageConfig("login.passw.confirmOk");
 			return "/pages/wellcome.jsf?faces-redirect=true";
 		}
@@ -122,7 +128,7 @@ public class LoginBean implements Serializable {
 
 	public String logOut() {
 
-		this.user = new User();
+		setUser(new User());
 
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 

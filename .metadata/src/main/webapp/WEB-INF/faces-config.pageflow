@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12839225897960" configfile="/AnaliseSistemas/src/main/webapp/WEB-INF/faces-config.xml">
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12839225897960" configfile="/sistemalaboratorio/src/main/webapp/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="payment.xhtml" x="122" y="178" id="pf128417776012122" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="payment.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="122" y="562" id="pf128417779137424" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" path="register.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="page2.xhtml" x="122" y="1330" id="pf128430768814316" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="page2.xhtml"/>
@@ -11,8 +11,8 @@
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="2866" id="pf14146392988840" outlinks="pf14146392988841" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/adm/senha.xhtml" x="338" y="2866" id="pf14146392988842" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf14146392988843" inlinks="pf14146392988841" path="/pages/adm/senha.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/welcome.xhtml?faces-redirect=true" x="554" y="2866" id="pf14146392988844" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf14146392988843" path="/pages/welcome.xhtml?faces-redirect=true"/>
-  <links id="pf14121349517921" target="pf14121349517923" source="pf14121349517920" outcome="cadUser"/>
-  <links id="pf14121349517922" target="pf14121349517920" source="pf14121349517923" outcome="editUsuer"/>
-  <links id="pf14146392988841" target="pf14146392988842" source="pf14146392988840" outcome="alterasenha"/>
-  <links id="pf14146392988843" target="pf14146392988844" source="pf14146392988842" outcome="senhaalterada"/>
+  <links id="pf14121349517921" target="pf14121349517923" source="pf14121349517920"/>
+  <links id="pf14121349517922" target="pf14121349517920" source="pf14121349517923"/>
+  <links id="pf14146392988841" target="pf14146392988842" source="pf14146392988840"/>
+  <links id="pf14146392988843" target="pf14146392988844" source="pf14146392988842"/>
 </pageflow:Pageflow>
