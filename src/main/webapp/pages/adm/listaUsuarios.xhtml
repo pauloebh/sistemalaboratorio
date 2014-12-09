@@ -7,7 +7,7 @@
 <ui:composition template="/pages/template.xhtml">
 	<ui:define name="corpo">
 		<h:form>
-			<p:dataTable id="users" var="user" value="#{userMB.userList}"
+			<p:dataTable id="users" var="user" value="#{userController.userList}"
 				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
 					<f:facet name="header">
 					<h:outputText
@@ -19,7 +19,7 @@
 					</f:facet>
 
 					<h:commandLink value="#{user.nome}"
-						action="#{userMB.editUser(user)}">
+						action="#{userController.editUser(user)}">
 					</h:commandLink>
 				</p:column>
 				<p:column>
@@ -38,7 +38,7 @@
 					<f:facet name="header">
 						<h:outputText value="" />
 					</f:facet>
-					<p:commandButton action="#{userMB.deleteUser(user)}" type="submit"
+					<p:commandButton action="#{userController.deleteUser(user)}" type="submit"
 						icon="ui-icon ui-icon-trash"
 						onclick="if (!confirm('Confirma a exlucão do usuario #{user.nome} ?')) return false;"
 						ajax="false" /> 

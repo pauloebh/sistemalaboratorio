@@ -28,7 +28,8 @@ public class UserMB implements Serializable {
 	@ManagedProperty(value = "#{UserService}")
     private IUserService userService;
 
-	public UserMB() {
+	public UserMB(IUserService userService) {
+		setUserService(userService);
 		setUser(new User());
         // montaPerfilList();
     }
