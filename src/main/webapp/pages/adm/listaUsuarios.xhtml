@@ -8,7 +8,7 @@
 	<ui:define name="corpo">
 		<h:form>
 			<p:commandButton action="#{userController.newUser}" type="submit"
-						icon="ui-icon ui-icon-new" ajax="false" /> 
+						icon="ui-icon ui-icon-document" ajax="false" /> 
 			<p:dataTable id="users" var="user" value="#{userController.userList}"
 				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
 					<f:facet name="header">

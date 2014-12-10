@@ -4,21 +4,23 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Table(name = "usuario")
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = -8772516708049621911L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userId")
-	private Integer userId=0;
+	@Column(name = "id")
+	private Integer id=0;
 
 	@Column(name = "cpf", unique = true, nullable = false, length = 14)
 	private String cpf;
@@ -32,11 +34,17 @@ public class User implements Serializable {
 	@Column(name = "senha", length = 200)
 	private String senha;
 
+    @ManyToOne(optional = true, fetch=FetchType.LAZY)
+	private Cliente cliente;
 
 	@Column(name = "ativo")
-	private boolean ativo;
+	private Boolean ativo;
 
-	public User () {
+	@Column(name = "contatoPrincipal", nullable = true)
+	private Boolean contatoPrincipal;
+	
+
+	public Usuario () {
 		
 	}
 	
@@ -47,14 +55,22 @@ public class User implements Serializable {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
+	
+	public boolean isContatoPrincipal() {
+		return contatoPrincipal;
+	}
 
-	public Integer getUserId() {
-		return userId;
+	public void setContatoPrincipal(boolean contatoPrincipal) {
+		this.contatoPrincipal = contatoPrincipal;
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCpf() {
@@ -96,7 +112,7 @@ public class User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -111,13 +127,21 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
-		if (userId == null) {
-			if (other.userId != null)
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

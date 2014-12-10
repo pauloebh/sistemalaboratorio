@@ -17,32 +17,47 @@
 	<navigation-rule>
 	    <from-view-id>/pages/adm/formUsuario.xhtml</from-view-id> 
 	    <navigation-case>
-	  		<from-outcome>listaUsuarios</from-outcome>
+	  		<from-outcome>listar</from-outcome>
             <to-view-id>/pages/adm/listaUsuarios.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
-    
     <navigation-rule>
 	    <from-view-id>/pages/adm/listaUsuarios.xhtml</from-view-id> 
 	    <navigation-case>
-	        <from-outcome>editUsuer</from-outcome>
+	        <from-outcome>editar</from-outcome>
             <to-view-id>/pages/adm/formUsuario.xhtml</to-view-id>
         </navigation-case>
 	    <navigation-case>
-	        <from-outcome>cadUser</from-outcome>
+	        <from-outcome>criar</from-outcome>
             <to-view-id>/pages/adm/formUsuario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>	
+    
+    <navigation-rule>
+	    <from-view-id>/pages/adm/formCliente.xhtml</from-view-id> 
+	    <navigation-case>
+	  		<from-outcome>listar</from-outcome>
+            <to-view-id>/pages/adm/listaClientes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+	    <from-view-id>/pages/adm/listaClientes.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>editar</from-outcome>
+            <to-view-id>/pages/adm/formCliente.xhtml</to-view-id>
+        </navigation-case>
+	    <navigation-case>
+	        <from-outcome>criar</from-outcome>
+            <to-view-id>/pages/adm/formCliente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-    
-        <navigation-rule>
+    <navigation-rule>
         <navigation-case>
             <from-outcome>alterasenha</from-outcome>
             <to-view-id>/pages/adm/senha.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
     <navigation-rule>
         <from-view-id>/pages/adm/senha.xhtml</from-view-id>
         <navigation-case>

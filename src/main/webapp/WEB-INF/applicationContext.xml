@@ -17,14 +17,21 @@
         <property name="sessionFactory" ref="mySessionFactory" />
     </bean>
 
-    <bean id="UserDaoImpl" class="com.dao.impl.UserDaoImpl" parent="abstractDao" >
+    <bean id="UsuarioDaoImpl" class="com.dao.impl.UsuarioDaoImpl" parent="abstractDao" >
+    </bean>
+    
+    <bean id="ClienteDaoImpl" class="com.dao.impl.ClienteDaoImpl" parent="abstractDao" >
     </bean>
     
 	<!-- Service Declaration -->
     <bean id="UserService" class="com.service.UserService">
-        <property name="userDAO" ref="UserDaoImpl" />
+        <property name="userDAO" ref="UsuarioDaoImpl" />
     </bean>
-
+    
+    <bean id="ClienteService" class="com.service.ClienteService">
+        <property name="clienteDAO" ref="ClienteDaoImpl" />
+    </bean>
+	
 	<!-- ManagedBeans -->
 	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request">
 		<constructor-arg ref="UserService" />
@@ -32,6 +39,15 @@
 
 	<bean id="userController" class="com.managed.bean.UserMB" scope="request">
 		<constructor-arg ref="UserService" />
+		<constructor-arg ref="ClienteService" />
+	</bean>
+
+	<bean id="clienteController" class="com.managed.bean.ClienteMB" scope="request">
+		<constructor-arg ref="ClienteService" />
+	</bean>
+	
+	<bean id="sessaoDoUsuario" class="com.managed.bean.SessaoDoUsuario" scope="session">
+		<constructor-arg ref="ClienteService" />
 	</bean>
 
 
@@ -67,14 +83,15 @@
 		<property name="dataSource" ref="myDataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.model.User</value>
+				<value>com.model.Usuario</value>
+				<value>com.model.Cliente</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">drop</prop>
 			</props>
 		</property>
 	</bean>

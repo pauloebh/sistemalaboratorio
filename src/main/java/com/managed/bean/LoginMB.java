@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.model.User;
+import com.model.Usuario;
 import com.service.IUserService;
 import com.util.JsfUtil;
 import com.util.Message;
@@ -18,7 +18,7 @@ public class LoginMB implements Serializable {
 	private static final String USUARIO_LOGADO = "usuarioLogado";
 	public static final String REDIRECT_TROCA_SENHA = "/pages/adm/senha.jsf?faces-redirect=true";
 
-	private User user;
+	private Usuario usuario;
 	private String senhaNova;
 	private String confirmaSenhaNova;
 
@@ -26,7 +26,7 @@ public class LoginMB implements Serializable {
 
 	public LoginMB(IUserService userService) {
 		setUserService(userService);
-		setUser(new User());
+		setUser(new Usuario());
 	}
 	
 	public IUserService getUserService() {
@@ -53,12 +53,12 @@ public class LoginMB implements Serializable {
 		this.senhaNova = senhaNova;
 	}
 
-	public User getUser() {
-		return this.user;
+	public Usuario getUser() {
+		return this.usuario;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public static long getSerialversionuid() {
@@ -73,7 +73,7 @@ public class LoginMB implements Serializable {
 
 		if (getUserService().buscaPorLogin(getUser())) {
 
-            setUser(getUserService().getUserByEmail(getUser()));
+            setUser(getUserService().getByEmail(getUser()));
 
 			JsfUtil.setSessionValue(USUARIO_LOGADO, getUser());
 
@@ -106,7 +106,7 @@ public class LoginMB implements Serializable {
 		if (getUser().getSenha() == "") {
 			Message.addMessage("login.passw.atual");
 			return null;
-		} else if (userService.buscaPorLogin(this.user) ) {
+		} else if (userService.buscaPorLogin(this.usuario) ) {
 			Message.addMessage("login.passw.atual");
 			return null;
 		} else if (getSenhaNova() == "") {
@@ -120,7 +120,7 @@ public class LoginMB implements Serializable {
 			return null;
 		} else {
 			getUser().setSenha(getSenhaNova());
-			getUserService().updateUser(getUser());
+			getUserService().update(getUser());
 			Message.addMessageConfig("login.passw.confirmOk");
 			return "/pages/wellcome.jsf?faces-redirect=true";
 		}
@@ -128,7 +128,7 @@ public class LoginMB implements Serializable {
 
 	public String logOut() {
 
-		setUser(new User());
+		setUser(new Usuario());
 
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 

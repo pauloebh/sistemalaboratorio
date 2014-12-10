@@ -6,16 +6,17 @@
 
 <ui:composition template="/pages/template.xhtml">
 	<ui:define name="corpo">
-		<h:form id="cadUsuario">
-			<p:panel id="panel" header="#{userMB.labelCadastro}">
+		<h:form id="cadCliente">
+			<p:panel id="panel" header="#{clienteController.labelCadastro}">
 				<p:messages />
-				<h:inputHidden value="#{userMB.user.userId}" />
+				<h:inputHidden value="#{clienteController.cliente.id}" />
 
 				<h:panelGrid columns="3" cellpadding="5">
+
 					<h:outputLabel for="name"
 						value="#{msgs['cadastroUsuario.label.nome']}" />
 
-					<p:inputText id="name" value="#{userMB.user.nome}" required="true"
+					<p:inputText id="name" value="#{clienteController.cliente.nome}" required="true"
 						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
 						style="width:300px">
 						<f:validateLength minimum="4" />
@@ -26,7 +27,7 @@
 					<h:outputLabel for="cpf"
 						value="#{msgs['cadastroUsuario.label.cpf']}" />
 					<p:inputMask id="cpf" mask="999.999.999-99"
-						value="#{userMB.user.cpf}" maxlength="14" required="true"
+						value="#{clienteController.cliente.cpfcnpj}" maxlength="14" required="true"
 						requiredMessage="#{msgs['cadastroUsuario.cpf.required']}"
 						style="width:300px">
 						<p:ajax event="blur" update="idMsg" />
@@ -35,7 +36,7 @@
 
 					<h:outputLabel for="email"
 						value="#{msgs['cadastroUsuario.label.email']}" />
-					<p:inputText id="email" value="#{userMB.user.email}"
+					<p:inputText id="email" value="#{clienteController.cliente.email}"
 						required="true"
 						requiredMessage="#{msgs['cadastroUsuario.email.required']}"
 						validatorMessage="#{msgs['cadastroUsuario.email.requiredValidator']}"
@@ -49,13 +50,13 @@
 					
 					</h:panelGrid>
 
-				<p:commandButton id="addUser"
+				<p:commandButton id="adicionar"
 					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
-					action="#{userMB.addUser}" ajax="false" />
+					action="#{clienteController.adicionar}" ajax="false" />
 
 				<p:commandButton id="limpar"
 					value="#{msgs['cadastroUsuario.label.reset']}"
-					action="#{userMB.limpar}" type="reset" ajax="false" />
+					action="#{clienteController.limpar}" type="reset" ajax="false" />
 			</p:panel>
 		</h:form>
 	</ui:define>

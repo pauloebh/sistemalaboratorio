@@ -17,7 +17,7 @@ public class AddUser {
 		Perfil perfil = (Perfil) appContext.getBean(Perfil.class);
 		perfil.setTipo("testePerfil");
 		
-		User user = (User) appContext.getBean(User.class);
+		Usuario user = (Usuario) appContext.getBean(Usuario.class);
 		user.setAtivo(true);
 		user.setCpf("111111111-29");
 		user.setEmail("email@teste.com");

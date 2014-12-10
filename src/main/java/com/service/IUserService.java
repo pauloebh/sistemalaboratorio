@@ -2,19 +2,19 @@ package com.service;
 
 import java.util.List;
 
-import com.model.User;
+import com.model.Usuario;
 
 public interface IUserService {
 	
-	public void addUser(User user);
-	public void updateUser(User user);
-	public void deleteUser(User user);
-	public User getUserById(User user);
-	public User getUserByCpf(User user);
-	public User getUserByEmail(User user);
-	public List<User> getUsers();
-    User recuperar(Integer id);
-	public abstract boolean isExiteUser(User user);
-	public abstract boolean buscaPorLogin(User user);
+	public void add(Usuario usuario);
+	public void update(Usuario usuario);
+	public void delete(Usuario usuario);
+	public Usuario getById(Usuario usuario);
+	public Usuario getByCpf(Usuario usuario);
+	public Usuario getByEmail(Usuario usuario);
+	public List<Usuario> getAll();
+    public Usuario recuperar(Integer id);
+	public abstract boolean isExiste(Usuario usuario);
+	public abstract boolean buscaPorLogin(Usuario usuario);
 
 }

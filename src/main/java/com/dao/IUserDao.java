@@ -1,14 +1,14 @@
 package com.dao;
 
-import com.model.User;
+import com.model.Usuario;
 
 import java.util.List;
 
-public interface IUserDao extends InterfaceDao<User> {
+public interface IUserDao extends InterfaceDao<Usuario> {
  
-    public User recuperar(User user);
-    public User recuperarPorCpf(User user);
-    public User recuperarPorEmail(User user);
-    public Boolean buscaPorLogin(User user);
-    List<User> todos();
+    public Usuario recuperar(Usuario usuario);
+    public Usuario recuperarPorCpf(Usuario usuario);
+    public Usuario recuperarPorEmail(Usuario usuario);
+    public Boolean buscaPorLogin(Usuario usuario);
+    List<Usuario> todos();
 }

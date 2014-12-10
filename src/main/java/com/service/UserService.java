@@ -1,13 +1,12 @@
 package com.service;
 
-import com.dao.IUserDao;
-import com.dao.impl.UserDaoImpl;
-import com.model.User;
+import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
-import java.util.List;
+import com.dao.IUserDao;
+import com.model.Usuario;
 
 @Transactional(readOnly = true)
 public class UserService implements IUserService,Serializable {
@@ -21,49 +20,49 @@ public class UserService implements IUserService,Serializable {
     }
 
     @Transactional(readOnly = false)
-    public void addUser(User user) {
-        userDAO.adicionar(user); 		// verifica se existe o ID cadastrado
+    public void add(Usuario usuario) {
+        userDAO.adicionar(usuario); 		// verifica se existe o ID cadastrado
     }
 
-    public boolean isExiteUser(User user) {
+    public boolean isExiste(Usuario usuario) {
         //Verifica se existe usuario user.getNome()
-        if (getUserByCpf(user) != null || getUserByEmail(user) != null)
+        if (getByCpf(usuario) != null || getByEmail(usuario) != null)
             return true;
         else
             return false;
     }
 
-    public boolean buscaPorLogin(User user) {
-        return userDAO.buscaPorLogin(user);
+    public boolean buscaPorLogin(Usuario usuario) {
+        return userDAO.buscaPorLogin(usuario);
     }
 
-    public User recuperar(Integer id) {
+    public Usuario recuperar(Integer id) {
         return userDAO.recuperar(id);
     }
 
     @Transactional(readOnly = false)
-    public void deleteUser(User user) {
-        userDAO.deletar(user);
+    public void delete(Usuario usuario) {
+        userDAO.deletar(usuario);
     }
 
     @Transactional(readOnly = false)
-    public void updateUser(User user) {
-        userDAO.atualizar(user);
+    public void update(Usuario usuario) {
+        userDAO.atualizar(usuario);
     }
 
-    public User getUserById(User user) {
-        return userDAO.recuperar(user);
+    public Usuario getById(Usuario usuario) {
+        return userDAO.recuperar(usuario);
     }
 
-    public User getUserByCpf(User user) {
-        return userDAO.recuperarPorCpf(user);
+    public Usuario getByCpf(Usuario usuario) {
+        return userDAO.recuperarPorCpf(usuario);
     }
 
-    public User getUserByEmail(User user) {
-        return userDAO.recuperarPorEmail(user);
+    public Usuario getByEmail(Usuario usuario) {
+        return userDAO.recuperarPorEmail(usuario);
     }
 
-    public List<User> getUsers() {
+    public List<Usuario> getAll() {
         return userDAO.todos();
     }
 

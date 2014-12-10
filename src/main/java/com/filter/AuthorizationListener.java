@@ -7,7 +7,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import com.model.User;
+import com.model.Usuario;
 
 public class AuthorizationListener implements PhaseListener {
 
@@ -24,7 +24,7 @@ public class AuthorizationListener implements PhaseListener {
 
         boolean isLoginPage = (currentPage.lastIndexOf(PAGES_LOGIN_XHTML) > -1);
         ExternalContext context = facesContext.getExternalContext();
-        User currentUser = (User) context.getSessionMap().get(USUARIO_LOGADO);
+        Usuario currentUser = (Usuario) context.getSessionMap().get(USUARIO_LOGADO);
 
 /*        if (!isLoginPage && currentUser == null) {
 

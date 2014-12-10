@@ -1,7 +1,7 @@
 package com.dao.impl;
 
 import com.dao.IUserDao;
-import com.model.User;
+import com.model.Usuario;
 
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
@@ -10,61 +10,61 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class UserDaoImpl extends AbstractDaoImpl<User> implements IUserDao, Serializable {
+public class UsuarioDaoImpl extends AbstractDaoImpl<Usuario> implements IUserDao, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-    protected Class<User> getEntityClass() {
-        return User.class;
+    protected Class<Usuario> getEntityClass() {
+        return Usuario.class;
     }
  
-	public User recuperar(User user) {
-		return recuperar(user.getUserId());
+	public Usuario recuperar(Usuario usuario) {
+		return recuperar(usuario.getId());
 	}
 
-	public User recuperarPorCpf(User user) {
+	public Usuario recuperarPorCpf(Usuario usuario) {
 		
-		String cpf = user.getCpf();
+		String cpf = usuario.getCpf();
 		Query q = getSession().createQuery(
-				"from User where cpf=:cpf");
+				"from Usuario where cpf=:cpf");
 
 		q.setParameter("cpf", cpf);
 
 		try {
-			return (User) q.uniqueResult();
+			return (Usuario) q.uniqueResult();
 		} catch (NonUniqueResultException e) {
 			throw new IllegalArgumentException("CPF informado retornou mais de 1 resultado");
 		}
 
 	}
 
-	public User recuperarPorEmail(User user) {
+	public Usuario recuperarPorEmail(Usuario usuario) {
 		
-		String email = user.getEmail();
+		String email = usuario.getEmail();
 
 		Query q = getSession().createQuery(
-				"from User where email=:email");
+				"from Usuario where email=:email");
 
 		q.setParameter("email", email);
 
 		try {
-			return (User) q.uniqueResult();
+			return (Usuario) q.uniqueResult();
 		} catch (NonUniqueResultException e) {
 			throw new IllegalArgumentException("Email informado retornou mais de 1 resultado");
 		}
 
 	}
 
-	public Boolean buscaPorLogin(User user) {
+	public Boolean buscaPorLogin(Usuario usuario) {
 
 		Query q = getSession().createQuery(
-                "from User u where u.email = :pLogin and u.senha = :pSenha");
+                "from Usuario u where u.email = :pLogin and u.senha = :pSenha");
 
-		q.setParameter("pLogin", user.getEmail());
-		q.setParameter("pSenha", user.getSenha());
+		q.setParameter("pLogin", usuario.getEmail());
+		q.setParameter("pSenha", usuario.getSenha());
 
 		try {
-            User p = (User) q.uniqueResult();
+            Usuario p = (Usuario) q.uniqueResult();
 			if (p == null) {
 				return false;
 			} else {
@@ -76,8 +76,8 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements IUserDao, Seri
 
 	}
 
-	public List<User> todos() {
-		List list = getSession().createQuery("from User").list();
+	public List<Usuario> todos() {
+		List list = getSession().createQuery("from Usuario").list();
 		return Collections.unmodifiableList(list);
 	}
 

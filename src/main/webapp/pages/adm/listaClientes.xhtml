@@ -7,7 +7,11 @@
 <ui:composition template="/pages/template.xhtml">
 	<ui:define name="corpo">
 		<h:form>
-			<p:dataTable id="users" var="user" value="#{userMB.userList}"
+		
+			<p:commandButton action="#{clienteController.novo}" type="submit"
+						icon="ui-icon ui-icon-new" ajax="false" /> 
+						
+			<p:dataTable id="clientes" var="cliente" value="#{clienteController.clienteList}"
 				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
 					<f:facet name="header">
 					<h:outputText
@@ -18,29 +22,29 @@
 						<h:outputText value="Name" />
 					</f:facet>
 
-					<h:commandLink value="#{user.nome}"
-						action="#{userMB.editUser(user)}">
+					<h:commandLink value="#{cliente.nome}"
+						action="#{clienteMB.editar(cliente)}">
 					</h:commandLink>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Cpf" />
+						<h:outputText value="CPF/CNPJ" />
 					</f:facet>
-					<h:outputText value="#{user.cpf}" />
+					<h:outputText value="#{cliente.cpfcnpj}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="E-mail" />
 					</f:facet>
-					<h:outputText value="#{user.email}" />
+					<h:outputText value="#{cliente.email}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="" />
 					</f:facet>
-					<p:commandButton action="#{userMB.deleteUser(user)}" type="submit"
+					<p:commandButton action="#{clienteMB.deletar(cliente)}" type="submit"
 						icon="ui-icon ui-icon-trash"
-						onclick="if (!confirm('Confirma a exlucão do usuario #{user.nome} ?')) return false;"
+						onclick="if (!confirm('Confirma a exlucão do usuario #{cliente.nome} ?')) return false;"
 						ajax="false" /> 
 				</p:column>
 				<!-- type="submit"  image="/resources/imagens/excluir16.png"  -->

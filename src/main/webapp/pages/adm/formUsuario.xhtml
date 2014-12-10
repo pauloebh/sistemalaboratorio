@@ -8,10 +8,11 @@
 	<ui:define name="corpo">
 		<h:form id="cadUsuario">
 			<p:panel id="panel" header="#{userController.labelCadastro}">
-				<p:messages />
-				<h:inputHidden value="#{userController.user.userId}" />
+							
+				<h:inputHidden value="#{userController.user.id}" />
 
 				<h:panelGrid columns="3" cellpadding="5">
+						
 					<h:outputLabel for="name"
 						value="#{msgs['cadastroUsuario.label.nome']}" />
 
