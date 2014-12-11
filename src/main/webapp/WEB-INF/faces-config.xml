@@ -53,6 +53,44 @@
     </navigation-rule>
     
     <navigation-rule>
+	    <from-view-id>/pages/tec/formPerfil.xhtml</from-view-id> 
+	    <navigation-case>
+	  		<from-outcome>listar</from-outcome>
+            <to-view-id>/pages/tec/listaPerfis.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+	    <from-view-id>/pages/tec/listaPerfis.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>editar</from-outcome>
+            <to-view-id>/pages/tec/formPerfil.xhtml</to-view-id>
+        </navigation-case>
+	    <navigation-case>
+	        <from-outcome>criar</from-outcome>
+            <to-view-id>/pages/tec/formPerfil.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>	
+    
+    <navigation-rule>
+	    <from-view-id>/pages/tec/formFuncao.xhtml</from-view-id> 
+	    <navigation-case>
+	  		<from-outcome>listar</from-outcome>
+            <to-view-id>/pages/tec/listaFuncoes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+	    <from-view-id>/pages/tec/listaFuncoes.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>editar</from-outcome>
+            <to-view-id>/pages/tec/formFuncao.xhtml</to-view-id>
+        </navigation-case>
+	    <navigation-case>
+	        <from-outcome>criar</from-outcome>
+            <to-view-id>/pages/tec/formFuncao.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <navigation-case>
             <from-outcome>alterasenha</from-outcome>
             <to-view-id>/pages/adm/senha.xhtml</to-view-id>

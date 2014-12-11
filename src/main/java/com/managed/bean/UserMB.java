@@ -12,12 +12,9 @@ import com.service.IClienteService;
 import com.service.IUserService;
 import com.util.Message;
 
-public class UserMB implements Serializable {
+public class UserMB extends BaseMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final String CRIAR = "criar";
-    private static final String EDITAR = "editar";
-    private static final String LISTAR = "listar";
 
     private Usuario usuario;
     

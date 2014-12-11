@@ -10,7 +10,7 @@ import com.service.IUserService;
 import com.util.JsfUtil;
 import com.util.Message;
 
-public class LoginMB implements Serializable {
+public class LoginMB extends BaseMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,14 +27,6 @@ public class LoginMB implements Serializable {
 	public LoginMB(IUserService userService) {
 		setUserService(userService);
 		setUser(new Usuario());
-	}
-	
-	public IUserService getUserService() {
-		return this.userService;
-	}
-
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
 	}
 
 	public String getConfirmaSenhaNova() {
@@ -65,6 +57,14 @@ public class LoginMB implements Serializable {
 		return serialVersionUID;
 	}
 
+	public IUserService getUserService() {
+		return this.userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+	
 	public String efetuaLogin() {
 		if (getUser().getEmail() == null || getUser().getSenha() == null) {
 			Message.addMessage("login.userEpassw.required");

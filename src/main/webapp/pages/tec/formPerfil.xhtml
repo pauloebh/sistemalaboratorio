@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/pages/template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="cadPerfil">
+			<p:panel id="panel" header="#{perfilController.labelCadastro}">
+				<p:messages />
+				<h:inputHidden value="#{perfilController.perfil.id}" />
+
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<h:outputLabel for="name"
+						value="#{msgs['cadastroUsuario.label.nome']}" />
+
+					<p:inputText id="name" value="#{perfilController.perfil.nome}"
+						required="true"
+						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
+						style="width:300px">
+						<f:validateLength minimum="4" />
+						<p:ajax event="blur" update="nameMsg" />
+					</p:inputText>
+					<p:message id="nameMsg" for="name" />
+
+					<h:outputLabel for="ativo"
+						value="#{msgs['cadastroUsuario.label.cpf']}" />
+					<p:selectBooleanCheckbox id="ativo"
+						value="#{perfilController.perfil.ativo}" />
+
+				</h:panelGrid>
+
+				<p:commandButton id="adicionar"
+					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
+					action="#{perfilController.adicionar}" ajax="false" />
+
+				<p:commandButton id="limpar"
+					value="#{msgs['cadastroUsuario.label.reset']}"
+					action="#{perfilController.limpar}" type="reset" ajax="false" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.Cliente;
-import com.model.Usuario;
 import com.service.IClienteService;
 import com.util.Message;
 
-public class ClienteMB implements Serializable {
+
+public class ClienteMB extends BaseMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String CRIAR = "criar";
-	private static final String EDITAR = "editar";
-	private static final String LISTAR = "listar";
 
 	private Cliente cliente;
 
@@ -105,11 +102,11 @@ public class ClienteMB implements Serializable {
 		this.clienteList = clienteList;
 	}
 
-	public IClienteService getClienteService() {
-		return this.clienteService;
+	private IClienteService getClienteService() {
+		return clienteService;
 	}
 
-	public void setClienteService(IClienteService clienteService) {
+	private void setClienteService(IClienteService clienteService) {
 		this.clienteService = clienteService;
 	}
 

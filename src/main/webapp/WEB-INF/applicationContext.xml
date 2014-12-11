@@ -23,27 +23,53 @@
     <bean id="ClienteDaoImpl" class="com.dao.impl.ClienteDaoImpl" parent="abstractDao" >
     </bean>
     
-	<!-- Service Declaration -->
-    <bean id="UserService" class="com.service.UserService">
+    <bean id="PerfilDaoImpl" class="com.dao.impl.PerfilDaoImpl" parent="abstractDao" >
+    </bean>
+    
+    <bean id="FuncaoDaoImpl" class="com.dao.impl.FuncaoDaoImpl" parent="abstractDao" >
+    </bean>
+    
+	<!-- Service Declaration -->    
+    <bean id="UserService" class="com.service.UserService" >
         <property name="userDAO" ref="UsuarioDaoImpl" />
     </bean>
     
-    <bean id="ClienteService" class="com.service.ClienteService">
+    <bean id="ClienteService" class="com.service.ClienteService" >
         <property name="clienteDAO" ref="ClienteDaoImpl" />
     </bean>
 	
+	<bean id="PerfilService" class="com.service.PerfilService" >
+        <property name="perfilDAO" ref="PerfilDaoImpl" />
+    </bean>
+    
+    <bean id="FuncaoService" class="com.service.FuncaoService" >
+        <property name="funcaoDAO" ref="FuncaoDaoImpl" />
+    </bean>
+    
 	<!-- ManagedBeans -->
-	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request">
+	<bean id="baseController" class="com.managed.bean.BaseMB" abstract="true" scope="request">
+	</bean>
+    
+	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request" parent="baseController">
 		<constructor-arg ref="UserService" />
 	</bean>
 
-	<bean id="userController" class="com.managed.bean.UserMB" scope="request">
+	<bean id="userController" class="com.managed.bean.UserMB" scope="request" parent="baseController">
 		<constructor-arg ref="UserService" />
 		<constructor-arg ref="ClienteService" />
 	</bean>
 
-	<bean id="clienteController" class="com.managed.bean.ClienteMB" scope="request">
+	<bean id="clienteController" class="com.managed.bean.ClienteMB" scope="request" parent="baseController">
 		<constructor-arg ref="ClienteService" />
+	</bean>
+	
+	<bean id="perfilController" class="com.managed.bean.PerfilMB" scope="request" parent="baseController">
+		<constructor-arg ref="PerfilService" />
+		<constructor-arg ref="FuncaoService" />
+	</bean>
+
+	<bean id="funcaoController" class="com.managed.bean.FuncaoMB" scope="request" parent="baseController">
+		<constructor-arg ref="FuncaoService" />
 	</bean>
 	
 	<bean id="sessaoDoUsuario" class="com.managed.bean.SessaoDoUsuario" scope="session">
@@ -85,13 +111,15 @@
 			<list>
 				<value>com.model.Usuario</value>
 				<value>com.model.Cliente</value>
+				<value>com.model.Funcao</value>
+				<value>com.model.Perfil</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">drop</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>
 	</bean>
