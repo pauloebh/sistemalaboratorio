@@ -1,12 +1,14 @@
-package com.service;
+package com.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aop.log.Log;
 import com.dao.IClienteDao;
 import com.model.Cliente;
+import com.service.IClienteService;
 
 @Transactional(readOnly = true)
 public class ClienteService implements Serializable, IClienteService {
@@ -23,6 +25,7 @@ public class ClienteService implements Serializable, IClienteService {
 	 * @see com.service.IClienteService#add(com.model.Cliente)
 	 */
     @Transactional(readOnly = false)
+    @Log
     public void add(Cliente cliente) {
         clienteDAO.adicionar(cliente); 		// verifica se existe o ID cadastrado
     }
@@ -49,6 +52,7 @@ public class ClienteService implements Serializable, IClienteService {
 	 * @see com.service.IClienteService#delete(com.model.Cliente)
 	 */
     @Transactional(readOnly = false)
+    @Log
     public void delete(Cliente cliente) {
         clienteDAO.deletar(cliente);
     }
@@ -57,6 +61,7 @@ public class ClienteService implements Serializable, IClienteService {
 	 * @see com.service.IClienteService#update(com.model.Cliente)
 	 */
     @Transactional(readOnly = false)
+    @Log
     public void update(Cliente cliente) {
         clienteDAO.atualizar(cliente);
     }

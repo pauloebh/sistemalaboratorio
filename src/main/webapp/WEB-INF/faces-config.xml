@@ -88,6 +88,21 @@
 	        <from-outcome>criar</from-outcome>
             <to-view-id>/pages/tec/formFuncao.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>  
+      
+    <navigation-rule>
+	    <from-view-id>/pages/tec/formLog.xhtml</from-view-id> 
+	    <navigation-case>
+	  		<from-outcome>listar</from-outcome>
+            <to-view-id>/pages/tec/listaLogs.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+	    <from-view-id>/pages/tec/listaLogs.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>visualizar</from-outcome>
+            <to-view-id>/pages/tec/formLog.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>

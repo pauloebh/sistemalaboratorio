@@ -1,81 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/tx 
-       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
        http://www.springframework.org/schema/aop 
-       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-                        
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <!-- DAO Declaration -->
-    <bean id="abstractDao" class="com.dao.AbstractDaoImpl" abstract="true" >
-        <property name="sessionFactory" ref="mySessionFactory" />
-    </bean>
+	<!-- DAO Declaration -->
+	<bean id="abstractDao" class="com.dao.AbstractDaoImpl" abstract="true">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
 
-    <bean id="UsuarioDaoImpl" class="com.dao.impl.UsuarioDaoImpl" parent="abstractDao" >
-    </bean>
-    
-    <bean id="ClienteDaoImpl" class="com.dao.impl.ClienteDaoImpl" parent="abstractDao" >
-    </bean>
-    
-    <bean id="PerfilDaoImpl" class="com.dao.impl.PerfilDaoImpl" parent="abstractDao" >
-    </bean>
-    
-    <bean id="FuncaoDaoImpl" class="com.dao.impl.FuncaoDaoImpl" parent="abstractDao" >
-    </bean>
-    
-	<!-- Service Declaration -->    
-    <bean id="UserService" class="com.service.UserService" >
-        <property name="userDAO" ref="UsuarioDaoImpl" />
-    </bean>
-    
-    <bean id="ClienteService" class="com.service.ClienteService" >
-        <property name="clienteDAO" ref="ClienteDaoImpl" />
-    </bean>
-	
-	<bean id="PerfilService" class="com.service.PerfilService" >
-        <property name="perfilDAO" ref="PerfilDaoImpl" />
-    </bean>
-    
-    <bean id="FuncaoService" class="com.service.FuncaoService" >
-        <property name="funcaoDAO" ref="FuncaoDaoImpl" />
-    </bean>
-    
+	<bean id="LogDaoImpl" class="com.dao.impl.LogDaoImpl" parent="abstractDao">
+	</bean>
+
+	<bean id="UsuarioDaoImpl" class="com.dao.impl.UsuarioDaoImpl"
+		parent="abstractDao">
+	</bean>
+
+	<bean id="ClienteDaoImpl" class="com.dao.impl.ClienteDaoImpl"
+		parent="abstractDao">
+	</bean>
+
+	<bean id="PerfilDaoImpl" class="com.dao.impl.PerfilDaoImpl"
+		parent="abstractDao">
+	</bean>
+
+	<bean id="FuncaoDaoImpl" class="com.dao.impl.FuncaoDaoImpl"
+		parent="abstractDao">
+	</bean>
+
+	<!-- Service Declaration -->
+	<bean id="LogService" class="com.service.impl.LogService">
+		<property name="logDAO" ref="LogDaoImpl" />
+	</bean>
+
+	<bean id="UserService" class="com.service.impl.UserService">
+		<property name="userDAO" ref="UsuarioDaoImpl" />
+	</bean>
+
+	<bean id="ClienteService" class="com.service.impl.ClienteService">
+		<property name="clienteDAO" ref="ClienteDaoImpl" />
+	</bean>
+
+	<bean id="PerfilService" class="com.service.impl.PerfilService">
+		<property name="perfilDAO" ref="PerfilDaoImpl" />
+	</bean>
+
+	<bean id="FuncaoService" class="com.service.impl.FuncaoService">
+		<property name="funcaoDAO" ref="FuncaoDaoImpl" />
+	</bean>
+
 	<!-- ManagedBeans -->
-	<bean id="baseController" class="com.managed.bean.BaseMB" abstract="true" scope="request">
+	<bean id="baseController" class="com.managed.bean.BaseMB"
+		abstract="true" scope="request">
 	</bean>
-    
-	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request" parent="baseController">
+
+	<bean id="logController" class="com.managed.bean.LogMB" scope="request"
+		parent="baseController">
+		<constructor-arg ref="LogService" />
+	</bean>
+
+	<bean id="loginController" class="com.managed.bean.LoginMB" scope="request"
+		parent="baseController">
 		<constructor-arg ref="UserService" />
 	</bean>
 
-	<bean id="userController" class="com.managed.bean.UserMB" scope="request" parent="baseController">
+	<bean id="userController" class="com.managed.bean.UserMB" scope="request"
+		parent="baseController">
 		<constructor-arg ref="UserService" />
 		<constructor-arg ref="ClienteService" />
 	</bean>
 
-	<bean id="clienteController" class="com.managed.bean.ClienteMB" scope="request" parent="baseController">
+	<bean id="clienteController" class="com.managed.bean.ClienteMB"
+		scope="request" parent="baseController">
 		<constructor-arg ref="ClienteService" />
 	</bean>
-	
-	<bean id="perfilController" class="com.managed.bean.PerfilMB" scope="request" parent="baseController">
+
+	<bean id="perfilController" class="com.managed.bean.PerfilMB"
+		scope="request" parent="baseController">
 		<constructor-arg ref="PerfilService" />
 		<constructor-arg ref="FuncaoService" />
 	</bean>
 
-	<bean id="funcaoController" class="com.managed.bean.FuncaoMB" scope="request" parent="baseController">
+	<bean id="funcaoController" class="com.managed.bean.FuncaoMB"
+		scope="request" parent="baseController">
 		<constructor-arg ref="FuncaoService" />
 	</bean>
-	
-	<bean id="sessaoDoUsuario" class="com.managed.bean.SessaoDoUsuario" scope="session">
+
+	<bean id="sessaoDoUsuario" class="com.managed.bean.SessaoDoUsuario"
+		scope="session">
 		<constructor-arg ref="ClienteService" />
 	</bean>
 
+	<!-- configuracoes -->
+
+	<!--AspectJ 
+	<aop:aspectj-autoproxy proxy-target-class="true" />-->
+
+	<!--Controle de transacao -->
+	<tx:annotation-driven />
+
+	<!-- ====Instanciando singletons com anotacoes do Spring=====
+	<context:annotation-config />
+	<context:component-scan base-package="com.aop.log" />-->
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -104,8 +138,8 @@
 	</bean>
 
 	<!-- Session Factory Declaration -->
-    <bean id="mySessionFactory"
-          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="annotatedClasses">
 			<list>
@@ -113,6 +147,7 @@
 				<value>com.model.Cliente</value>
 				<value>com.model.Funcao</value>
 				<value>com.model.Perfil</value>
+				<value>com.model.Log</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -124,21 +159,11 @@
 		</property>
 	</bean>
 
-<!--     <tx:annotation-driven transaction-manager="txManager" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
 
-    <bean id="txManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean> -->
-    
-    <tx:annotation-driven/>
-    
-     <bean id="transactionManager"
-            class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-    <property name="sessionFactory" ref="mySessionFactory"/>
-  </bean>
-  
-    
 
 </beans>
 		

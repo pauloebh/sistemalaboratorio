@@ -1,4 +1,4 @@
-package com.service;
+package com.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.IFuncaoDao;
 import com.model.Funcao;
+import com.service.IFuncaoService;
 
 @Transactional(readOnly = true)
 public class FuncaoService implements Serializable, IFuncaoService {

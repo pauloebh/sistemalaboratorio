@@ -9,7 +9,7 @@
                         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Service Declaration -->
-    <bean id="UserService" class="com.service.UserService">
+    <bean id="UserService" class="com.service.impl.UserService">
         <property name="userDAO" ref="UserDAO" />
     </bean>
 

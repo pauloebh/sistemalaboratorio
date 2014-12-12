@@ -1,4 +1,4 @@
-package com.service;
+package com.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.IPerfilDao;
 import com.model.Perfil;
+import com.service.IPerfilService;
 
 @Transactional(readOnly = true)
 public class PerfilService implements Serializable, IPerfilService {

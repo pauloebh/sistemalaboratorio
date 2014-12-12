@@ -16,6 +16,7 @@ public abstract class BaseMB implements Serializable {
 	public static final String CRIAR = "criar";
 	public static final String EDITAR = "editar";
 	public static final String LISTAR = "listar";
+	public static final String VISUALIZAR = "visualizar";
 
 	public String getTimeZone() {
 		return Calendar.getInstance().getTimeZone().getID();

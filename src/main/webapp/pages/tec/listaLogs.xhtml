@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/pages/template.xhtml">
+	<ui:define name="corpo">
+		<h:form>
+						
+			<p:dataTable id="logs" var="log" value="#{logController.logList}"
+				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
+					<f:facet name="header">
+					<h:outputText
+						value="#{msgs['cadastroUsuario.label.consulta']}" />
+					</f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="data" />
+					</f:facet>
+
+					<h:commandLink value="#{log.data}"
+						action="#{logController.visualizar(log)}">
+					</h:commandLink>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Usuario" />
+					</f:facet>
+					<h:outputText value="#{log.usuario.nome}" />
+				</p:column>
+
+				<!-- type="submit"  image="/resources/imagens/excluir16.png"  -->
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
