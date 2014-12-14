@@ -1,4 +1,4 @@
-package com.dao.impl;
+package carga.microrganismo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

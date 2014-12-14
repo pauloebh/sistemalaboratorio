@@ -13,9 +13,9 @@
 
 			<p:dataTable id="funcoes" var="funcao"
 				value="#{funcaoController.funcaoList}" paginator="true" rows="10"
-				style="width: 900px" emptyMessage="Nenhuma registro encontrado">
+				style="width: 900px" emptyMessage="#{msgs['padrao.registro.nenhum.encontrado']}">
 				<f:facet name="header">
-					<h:outputText value="#{msgs['cadastroUsuario.label.consulta']}" />
+					<h:outputText value="#{msgs['cadastroFuncao.label.funcoes']}" />
 				</f:facet>
 				<p:column>
 					<f:facet name="header">
