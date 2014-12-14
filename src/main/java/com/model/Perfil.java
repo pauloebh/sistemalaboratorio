@@ -28,7 +28,7 @@ public class Perfil implements Serializable {
 	private String nome;
 
 	@Column(name = "ativo")
-	private Boolean ativo;
+	private boolean ativo;
 
 	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
     //private Set<Funcao> funcoes;
@@ -59,14 +59,6 @@ public class Perfil implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	/*public Set<Funcao> getFuncoes() {
@@ -111,6 +103,14 @@ public class Perfil implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

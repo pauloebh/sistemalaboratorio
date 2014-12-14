@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.model.Funcao;
 import com.model.Perfil;
 import com.service.IFuncaoService;
 import com.service.IPerfilService;
 import com.util.Message;
+import com.util.view.SelectManyDataModel;
 
 public class PerfilMB extends BaseMB implements Serializable {
 
@@ -17,6 +19,8 @@ public class PerfilMB extends BaseMB implements Serializable {
 
 	private List<Perfil> perfilList;
 
+	private SelectManyDataModel<Funcao> comboFuncoes;
+	
 	private IPerfilService perfilService;
 	private IFuncaoService funcaoService;
 
@@ -24,6 +28,8 @@ public class PerfilMB extends BaseMB implements Serializable {
 	public PerfilMB(IPerfilService perfilService, IFuncaoService funcaoService) {
 		setPerfilService(perfilService);
 		setFuncaoService(funcaoService);
+		
+		setComboFuncoes(new SelectManyDataModel<Funcao>(new ArrayList<Funcao>(funcaoService.getAll())));
 		setPerfil(new Perfil());
 	}
 
@@ -120,5 +126,13 @@ public class PerfilMB extends BaseMB implements Serializable {
 
 	public void setFuncaoService(IFuncaoService funcaoService) {
 		this.funcaoService = funcaoService;
+	}
+
+	public SelectManyDataModel<Funcao> getComboFuncoes() {
+		return comboFuncoes;
+	}
+
+	public void setComboFuncoes(SelectManyDataModel<Funcao> comboFuncoes) {
+		this.comboFuncoes = comboFuncoes;
 	}
 }

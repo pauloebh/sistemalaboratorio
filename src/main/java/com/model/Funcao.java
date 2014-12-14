@@ -32,7 +32,7 @@ public class Funcao implements Serializable {
 	private String nome;
 
 	@Column(name = "ativo")
-	private Boolean ativo;
+	private boolean ativo;
 
 	//@ManyToMany(fetch = FetchType.LAZY)
 	//@JoinTable(name = "perfil", joinColumns = { 
@@ -63,13 +63,6 @@ public class Funcao implements Serializable {
 		this.nome = nome;
 	}
 	
-	public boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
 	
 	/*public Set<Perfil> getPerfis() {
 		return perfis;
@@ -113,6 +106,14 @@ public class Funcao implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 
