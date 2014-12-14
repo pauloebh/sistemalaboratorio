@@ -13,10 +13,10 @@
 				<h:panelGrid columns="3" cellpadding="5">
 						
 					<h:outputLabel for="name"
-						value="#{msgs['padrao.botao.nome']}" />
+						value="#{msgs['padrao.label.ativo']}" />
 
 					<p:inputText id="name" value="#{funcaoController.funcao.nome}" required="true"
-						requiredMessage="#{msgs['padrao.botao.nome.obrigatorio']}"
+						requiredMessage="#{msgs['padrao.label.nome.obrigatorio']}"
 						style="width:300px">
 						<f:validateLength minimum="4" />
 						<p:ajax event="blur" update="nameMsg" />
@@ -24,7 +24,7 @@
 					<p:message id="nameMsg" for="name" />
 
 					<h:outputLabel for="ativo"
-						value="#{msgs['padrao.botao.ativo']}" />
+						value="#{msgs['padrao.label.ativo']}" />
 					<p:selectBooleanCheckbox id="ativo"
 						value="#{funcaoController.funcao.ativo}" />
 					</h:panelGrid>

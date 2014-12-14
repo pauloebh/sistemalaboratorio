@@ -32,7 +32,7 @@ public class Funcao implements Serializable {
 	private String nome;
 
 	@Column(name = "ativo")
-	private boolean ativo;
+	private boolean ativo=true;
 
 	//@ManyToMany(fetch = FetchType.LAZY)
 	//@JoinTable(name = "perfil", joinColumns = { 
