@@ -71,6 +71,11 @@ public class Log implements Serializable {
 		this.usuario = usuario;
 	}*/
 
+	@Override
+	public String toString() {
+		return "Log: Usuario-> xxxx | data->"+getData().toString();
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

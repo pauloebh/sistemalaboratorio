@@ -129,6 +129,11 @@ public class Usuario implements Serializable {
 		this.perfis = perfis;
 	}*/
 
+	@Override
+	public String toString() {
+		return getNome();
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

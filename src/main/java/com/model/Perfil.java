@@ -1,12 +1,15 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -30,11 +33,11 @@ public class Perfil implements Serializable {
 	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
     //private Set<Funcao> funcoes;
 	
-	/*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "usuario", joinColumns = { 
-			@JoinColumn(name = "id", nullable = false, updatable = false) }, 
-			inverseJoinColumns = { @JoinColumn(name = "id", 
-					nullable = false, updatable = false) })*/
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinTable(name = "usuario", joinColumns = { 
+	//		@JoinColumn(name = "id", nullable = false, updatable = false) }, 
+	//		inverseJoinColumns = { @JoinColumn(name = "id", 
+	//				nullable = false, updatable = false) })
     //private Set<Usuario> usuarios;
 
 	public Perfil () {
@@ -73,6 +76,11 @@ public class Perfil implements Serializable {
 	public void setFuncoes(Set<Funcao> funcoes) {
 		this.funcoes = funcoes;
 	}*/
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
