@@ -25,8 +25,8 @@ public class LoginMB extends BaseMB implements Serializable {
 	private IUsuarioService usuarioService;
 
 	public LoginMB(IUsuarioService usuarioService) {
-		setUserService(usuarioService);
-		setUser(new Usuario());
+		setUsuarioService(usuarioService);
+		setUsuario(new Usuario());
 	}
 
 	public String getConfirmaSenhaNova() {
@@ -45,11 +45,11 @@ public class LoginMB extends BaseMB implements Serializable {
 		this.senhaNova = senhaNova;
 	}
 
-	public Usuario getUser() {
+	public Usuario getUsuario() {
 		return this.usuario;
 	}
 
-	public void setUser(Usuario usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
@@ -57,30 +57,30 @@ public class LoginMB extends BaseMB implements Serializable {
 		return serialVersionUID;
 	}
 
-	public IUsuarioService getUserService() {
+	public IUsuarioService getUsuarioService() {
 		return this.usuarioService;
 	}
 
-	public void setUserService(IUsuarioService usuarioService) {
+	public void setUsuarioService(IUsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
 	
 	public String efetuaLogin() {
-		if (getUser().getEmail() == null || getUser().getSenha() == null) {
+		if (getUsuario().getEmail() == null || getUsuario().getSenha() == null) {
 			Message.addMessage("login.userEpassw.required");
 			return null;
 		}
 
-		if (getUserService().buscaPorLogin(getUser())) {
+		if (getUsuarioService().buscaPorLogin(getUsuario())) {
 
-            setUser(getUserService().getByEmail(getUser()));
+            setUsuario(getUsuarioService().getByEmail(getUsuario()));
 
-			JsfUtil.setSessionValue(USUARIO_LOGADO, getUser());
+			JsfUtil.setSessionValue(USUARIO_LOGADO, getUsuario());
 
 			// verifica se contem 5 caracteres conforme a senha default
-			if (getUser().getSenha().length() == 5) {
-				if (getUser().getSenha().equals(
-						getUser().getSenha().replace(".", "").replace("-", "")
+			if (getUsuario().getSenha().length() == 5) {
+				if (getUsuario().getSenha().equals(
+						getUsuario().getSenha().replace(".", "").replace("-", "")
 						.substring(0, 5))) {
 					Message.addMessageConfig("cadastroUsuario.senha.senhaDefault");
 					return REDIRECT_TROCA_SENHA;
@@ -103,7 +103,7 @@ public class LoginMB extends BaseMB implements Serializable {
 
 	public String alteraSenha() {
 
-		if (getUser().getSenha() == "") {
+		if (getUsuario().getSenha() == "") {
 			Message.addMessage("login.passw.atual");
 			return null;
 		} else if (usuarioService.buscaPorLogin(this.usuario) ) {
@@ -119,8 +119,8 @@ public class LoginMB extends BaseMB implements Serializable {
 			Message.addMessage("login.passw.confirmError");
 			return null;
 		} else {
-			getUser().setSenha(getSenhaNova());
-			getUserService().update(getUser());
+			getUsuario().setSenha(getSenhaNova());
+			getUsuarioService().update(getUsuario());
 			Message.addMessageConfig("login.passw.confirmOk");
 			return "/pages/wellcome.jsf?faces-redirect=true";
 		}
@@ -128,7 +128,7 @@ public class LoginMB extends BaseMB implements Serializable {
 
 	public String logOut() {
 
-		setUser(new Usuario());
+		setUsuario(new Usuario());
 
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 

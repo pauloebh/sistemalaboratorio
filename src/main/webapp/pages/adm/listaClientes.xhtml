@@ -23,7 +23,7 @@
 					</f:facet>
 
 					<h:commandLink value="#{cliente.nome}"
-						action="#{clienteMB.editar(cliente)}">
+						action="#{clienteController.editar(cliente)}">
 					</h:commandLink>
 				</p:column>
 				<p:column>
@@ -42,7 +42,7 @@
 					<f:facet name="header">
 						<h:outputText value="" />
 					</f:facet>
-					<p:commandButton action="#{clienteMB.deletar(cliente)}" type="submit"
+					<p:commandButton action="#{clienteController.deletar(cliente)}" type="submit"
 						icon="ui-icon ui-icon-trash"
 						onclick="if (!confirm('Confirma a exlucão do usuario #{cliente.nome} ?')) return false;"
 						ajax="false" /> 
