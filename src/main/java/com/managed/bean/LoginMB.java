@@ -6,7 +6,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.model.Usuario;
-import com.service.IUserService;
+import com.service.IUsuarioService;
 import com.util.JsfUtil;
 import com.util.Message;
 
@@ -22,10 +22,10 @@ public class LoginMB extends BaseMB implements Serializable {
 	private String senhaNova;
 	private String confirmaSenhaNova;
 
-	private IUserService userService;
+	private IUsuarioService usuarioService;
 
-	public LoginMB(IUserService userService) {
-		setUserService(userService);
+	public LoginMB(IUsuarioService usuarioService) {
+		setUserService(usuarioService);
 		setUser(new Usuario());
 	}
 
@@ -57,12 +57,12 @@ public class LoginMB extends BaseMB implements Serializable {
 		return serialVersionUID;
 	}
 
-	public IUserService getUserService() {
-		return this.userService;
+	public IUsuarioService getUserService() {
+		return this.usuarioService;
 	}
 
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
+	public void setUserService(IUsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
 	}
 	
 	public String efetuaLogin() {
@@ -106,7 +106,7 @@ public class LoginMB extends BaseMB implements Serializable {
 		if (getUser().getSenha() == "") {
 			Message.addMessage("login.passw.atual");
 			return null;
-		} else if (userService.buscaPorLogin(this.usuario) ) {
+		} else if (usuarioService.buscaPorLogin(this.usuario) ) {
 			Message.addMessage("login.passw.atual");
 			return null;
 		} else if (getSenhaNova() == "") {

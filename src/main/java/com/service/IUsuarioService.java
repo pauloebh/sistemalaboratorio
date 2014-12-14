@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.model.Usuario;
 
-public interface IUserService {
+public interface IUsuarioService {
 
 	public abstract void add(Usuario usuario);
 
@@ -21,8 +21,6 @@ public interface IUserService {
 	public abstract void update(Usuario usuario);
 
 	public abstract Usuario getById(Usuario usuario);
-
-	public abstract Usuario getByCpf(Usuario usuario);
 
 	public abstract Usuario getByEmail(Usuario usuario);
 

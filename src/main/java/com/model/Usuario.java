@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -19,11 +22,8 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "idUsuario")
 	private Integer id=0;
-
-	@Column(name = "cpf", unique = true, nullable = false, length = 14)
-	private String cpf;
 
 	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
@@ -34,15 +34,22 @@ public class Usuario implements Serializable {
 	@Column(name = "senha", length = 200)
 	private String senha;
 
-    @ManyToOne(optional = true, fetch=FetchType.LAZY)
-	private Cliente cliente;
-
 	@Column(name = "ativo")
 	private Boolean ativo;
 
 	@Column(name = "contatoPrincipal", nullable = true)
 	private Boolean contatoPrincipal;
-	
+
+    @ManyToOne(optional = true, fetch=FetchType.LAZY)
+    @JoinColumn(name = "idCliente")
+    private Cliente cliente;
+
+    //@OneToMany(mappedBy = "usuario")
+	//private List<Log> logs;
+
+	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	//private Set<Perfil> perfis;
+    
 
 	public Usuario () {
 		
@@ -73,14 +80,6 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -104,6 +103,31 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	/*public List<Log> getLogs() {
+		return logs;
+	}
+
+	public void setLogs(List<Log> logs) {
+		this.logs = logs;
+	}*/
+
+	/*private List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	private void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}*/
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -134,14 +158,6 @@ public class Usuario implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 

@@ -1,6 +1,6 @@
 package com.dao.impl;
 
-import com.dao.IUserDao;
+import com.dao.IUsuarioDao;
 import com.model.Usuario;
 
 import org.hibernate.NonUniqueResultException;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class UsuarioDaoImpl extends AbstractDaoImpl<Usuario> implements IUserDao, Serializable {
+public class UsuarioDaoImpl extends AbstractDaoImpl<Usuario> implements IUsuarioDao, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,22 +20,6 @@ public class UsuarioDaoImpl extends AbstractDaoImpl<Usuario> implements IUserDao
  
 	public Usuario recuperar(Usuario usuario) {
 		return recuperar(usuario.getId());
-	}
-
-	public Usuario recuperarPorCpf(Usuario usuario) {
-		
-		String cpf = usuario.getCpf();
-		Query q = getSession().createQuery(
-				"from Usuario where cpf=:cpf");
-
-		q.setParameter("cpf", cpf);
-
-		try {
-			return (Usuario) q.uniqueResult();
-		} catch (NonUniqueResultException e) {
-			throw new IllegalArgumentException("CPF informado retornou mais de 1 resultado");
-		}
-
 	}
 
 	public Usuario recuperarPorEmail(Usuario usuario) {

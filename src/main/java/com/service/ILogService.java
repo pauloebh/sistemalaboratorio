@@ -41,7 +41,7 @@ public interface ILogService {
 	/* (non-Javadoc)
 	 * @see com.service.ILogService#getByNome(com.model.Log)
 	 */
-	public abstract List<Log> getByUsuario(Log Log);
+	//public abstract List<Log> getByUsuario(Log Log);
 
 	/* (non-Javadoc)
 	 * @see com.service.ILogService#getAll()

@@ -9,10 +9,10 @@ import javax.faces.model.SelectItem;
 import com.model.Cliente;
 import com.model.Usuario;
 import com.service.IClienteService;
-import com.service.IUserService;
+import com.service.IUsuarioService;
 import com.util.Message;
 
-public class UserMB extends BaseMB implements Serializable {
+public class UsuarioMB extends BaseMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,11 @@ public class UserMB extends BaseMB implements Serializable {
 	private List<Usuario> userList;
 	private List<Cliente> clienteList;
 
-    private IUserService userService;
+    private IUsuarioService usuarioService;
     private IClienteService clienteService;
 
-	public UserMB(IUserService userService, IClienteService clienteService) {
-		setUserService(userService);
+	public UsuarioMB(IUsuarioService usuarioService, IClienteService clienteService) {
+		setUserService(usuarioService);
 		setClienteService(clienteService);
 		
 		setUser(new Usuario());
@@ -59,7 +59,7 @@ public class UserMB extends BaseMB implements Serializable {
         } else if (!getUserService().isExiste(getUser())) {
 
             if (getUser().getSenha() == null) {
-                getUser().setSenha(getDefaultPassword(getUser().getCpf()));
+                getUser().setSenha(getDefaultPassword(getUser().getEmail()));
             }
 
             // /selecaoToPerfilEnum(this.user);
@@ -127,12 +127,12 @@ public class UserMB extends BaseMB implements Serializable {
 		this.userList = userList;
 	}
     
-    public IUserService getUserService() {
-		return this.userService;
+    public IUsuarioService getUserService() {
+		return this.usuarioService;
 	}
     
-    public void setUserService(IUserService userService) {
-        this.userService = userService;
+    public void setUserService(IUsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
     
     public IClienteService getClienteService() {

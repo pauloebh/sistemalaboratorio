@@ -3,18 +3,18 @@ package com.managed.bean;
 import java.io.Serializable;
 
 import com.model.Usuario;
-import com.service.IUserService;
+import com.service.IUsuarioService;
 
 
 public class SessaoDoUsuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private IUserService usuarioService;
+	private IUsuarioService usuarioService;
 
 	private Usuario usuarioLogado;
 
-    public SessaoDoUsuario(IUserService service) {
+    public SessaoDoUsuario(IUsuarioService service) {
     	setUsuarioService(service);
     	setUsuarioLogado(null);
     }
@@ -33,11 +33,11 @@ public class SessaoDoUsuario implements Serializable {
         //this.permissoes = papelService.getPapelResultante(usuarioLogado);
     }
 
-    public IUserService getUsuarioService() {
+    public IUsuarioService getUsuarioService() {
 		return usuarioService;
 	}
 
-	public void setUsuarioService(IUserService usuarioService) {
+	public void setUsuarioService(IUsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
 	

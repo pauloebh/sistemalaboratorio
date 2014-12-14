@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +21,7 @@ public class Log implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
+	@Column(name = "idLog")
 	private Integer id=0;
 
 	@Column(name = "descricao", unique=true, nullable = false, length = 50)
@@ -32,9 +30,9 @@ public class Log implements Serializable {
 	@Temporal(TemporalType.DATE)
     private Date data;
 	
-	@ManyToOne
-    @JoinColumn(name = "id")
-    private Usuario usuario;
+    //@ManyToOne(optional = true)
+    //@JoinColumn(name = "id")
+    //private Usuario usuario;
 
 	public Log () {
 		
@@ -49,6 +47,14 @@ public class Log implements Serializable {
 		this.id = id;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public Date getData() {
 		return data;
 	}
@@ -57,23 +63,14 @@ public class Log implements Serializable {
 		this.data = data;
 	}
 
-	public Usuario getUsuario() {
+	/*public Usuario getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
+	}*/
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

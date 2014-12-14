@@ -1,15 +1,12 @@
 package com.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -21,7 +18,7 @@ public class Perfil implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
+	@Column(name = "idPerfil")
 	private Integer id=0;
 
 	@Column(name = "nome", unique=true, nullable = false, length = 50)
@@ -30,9 +27,15 @@ public class Perfil implements Serializable {
 	@Column(name = "ativo")
 	private Boolean ativo;
 
-	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "perfis")
+	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "perfil")
     //private Set<Funcao> funcoes;
 	
+	/*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario", joinColumns = { 
+			@JoinColumn(name = "id", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "id", 
+					nullable = false, updatable = false) })*/
+    //private Set<Usuario> usuarios;
 
 	public Perfil () {
 		

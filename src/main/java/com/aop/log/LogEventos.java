@@ -48,7 +48,7 @@ public class LogEventos {
 
         Log log = new Log();
 
-        log.setUsuario(this.getUsuarioLogado());
+        //log.setUsuario(this.getUsuarioLogado());
         log.setData(new Date());
 
         try {

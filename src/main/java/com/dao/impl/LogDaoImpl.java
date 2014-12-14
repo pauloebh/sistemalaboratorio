@@ -22,7 +22,7 @@ public class LogDaoImpl extends AbstractDaoImpl<Log> implements ILogDao, Seriali
 		return recuperar(Log.getId());
 	}
 
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public List<Log> recuperarPorUsuario(Log Log) {
 		
 		Integer idUsuario = Log.getUsuario().getId();
@@ -37,7 +37,7 @@ public class LogDaoImpl extends AbstractDaoImpl<Log> implements ILogDao, Seriali
 			throw new IllegalArgumentException("Nome informado retornou mais de 1 resultado");
 		}
 
-	}
+	}*/
 
 	public List<Log> todos() {
 		List list = getSession().createQuery("from Log").list();

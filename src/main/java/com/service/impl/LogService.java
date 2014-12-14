@@ -93,9 +93,9 @@ public class LogService implements Serializable, ILogService {
     /* (non-Javadoc)
 	 * @see com.service.impl.ILogService#getByUsuario(com.model.Log)
 	 */
-    public List<Log> getByUsuario(Log Log) {
+    /*public List<Log> getByUsuario(Log Log) {
         return logDAO.recuperarPorUsuario(Log);
-    }
+    }*/
 
     /* (non-Javadoc)
 	 * @see com.service.ILogService#getAll()
