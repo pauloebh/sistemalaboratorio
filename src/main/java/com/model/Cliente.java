@@ -92,6 +92,11 @@ public class Cliente implements Serializable {
 		this.usuarios = usuarios;
 	}
 	
+	@Override
+	public String toString() {
+		return getNome();
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

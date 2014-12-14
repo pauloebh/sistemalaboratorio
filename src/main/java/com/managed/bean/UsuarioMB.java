@@ -4,23 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
-
 import com.model.Cliente;
 import com.model.Usuario;
 import com.service.IClienteService;
 import com.service.IUsuarioService;
 import com.util.Message;
+import com.util.view.SelectOneDataModel;
 
 public class UsuarioMB extends BaseMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Usuario usuario;
-    
-    private List<SelectItem> funcaoList;
+
 	private List<Usuario> userList;
-	private List<Cliente> clienteList;
+	
+	private SelectOneDataModel<Cliente> comboCliente;
 
     private IUsuarioService usuarioService;
     private IClienteService clienteService;
@@ -29,7 +28,9 @@ public class UsuarioMB extends BaseMB implements Serializable {
 		setUserService(usuarioService);
 		setClienteService(clienteService);
 		
-		setUser(new Usuario());
+		setComboCliente(new SelectOneDataModel<Cliente>(clienteService.getAll()));
+		
+		setUsuario(new Usuario());
         // montaPerfilList();
     }
 
@@ -42,28 +43,30 @@ public class UsuarioMB extends BaseMB implements Serializable {
     	//falta 
     }
     
-    public String newUser() {
-    	if (getUser() == null)
-    		setUser(new Usuario());
+    public String novo() {
+    	if (getUsuario() == null)
+    		setUsuario(new Usuario());
     		return CRIAR;
     }
     
-    public String addUser() {
+    public String salvar() {
 	
+    	//getUsuario().setCliente(getComboCliente().getObjetoSelecionado());
+    	
         // se o usuario existir atualiza
-        if (getUser().getId() != 0) {
+        if (getUsuario().getId() != 0) {
             // selecaoToPerfilEnum(this.user);
-            getUserService().update(getUser());
+            getUserService().update(getUsuario());
             return LISTAR;
             // valida se existe p/adicionar
-        } else if (!getUserService().isExiste(getUser())) {
+        } else if (!getUserService().isExiste(getUsuario())) {
 
-            if (getUser().getSenha() == null) {
-                getUser().setSenha(getDefaultPassword(getUser().getEmail()));
+            if (getUsuario().getSenha() == null) {
+                getUsuario().setSenha(getDefaultPassword(getUsuario().getEmail()));
             }
 
             // /selecaoToPerfilEnum(this.user);
-            getUserService().add(getUser());
+            getUserService().add(getUsuario());
             return LISTAR;
         } else {
             Message.addMessage("cadastroUsuario.existente");
@@ -71,27 +74,28 @@ public class UsuarioMB extends BaseMB implements Serializable {
         }
     }
 
-    public String deleteUser(Usuario usuario) {
+    public String deletar(Usuario usuario) {
         getUserService().delete(usuario);
         return null;
     }
 
-    public String updateUser(Usuario usuario) {
+    public String atualizar(Usuario usuario) {
         getUserService().update(usuario);
         return CRIAR;
     }
 
-    public String editUser(Usuario usuario) {
-        setUser(usuario);
+    public String editar(Usuario usuario) {
+        setUsuario(usuario);
+        //getComboCliente().setSelecao(usuario.getCliente().getNome());
         return EDITAR;
     }
 
-    public String listaUsuarios() {
+    public String listar() {
     	return LISTAR;
     }
     
     public String getLabelCadastro() {
-        if (getUser().getId() == 0) {
+        if (getUsuario().getId() == 0) {
             return Message.getBundleMessage("cadastroUsuario.label.titulo");
         } else {
             return Message
@@ -100,21 +104,15 @@ public class UsuarioMB extends BaseMB implements Serializable {
     }
 
     public void reset() {
-        setUser(new Usuario());
+        setUsuario(new Usuario());
     }
     
-    public Usuario getUser() {
+    public Usuario getUsuario() {
         return this.usuario;
     }
 
-    public void setUser(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    public List<Cliente> getClientes() {
-        this.clienteList = new ArrayList<Cliente>();
-        this.clienteList.addAll(getClienteService().getAll());
-        return clienteList;
     }
 
     public List<Usuario> getUserList() {
@@ -135,19 +133,19 @@ public class UsuarioMB extends BaseMB implements Serializable {
         this.usuarioService = usuarioService;
     }
     
-    public IClienteService getClienteService() {
+    public SelectOneDataModel<Cliente> getComboCliente() {
+		return comboCliente;
+	}
+
+	public void setComboCliente(SelectOneDataModel<Cliente> comboCliente) {
+		this.comboCliente = comboCliente;
+	}
+
+	public IClienteService getClienteService() {
 		return this.clienteService;
 	}
     
     public void setClienteService(IClienteService clienteService) {
         this.clienteService = clienteService;
     }
-    
-    public List<SelectItem> getFuncaoList() {
-		return funcaoList;
-	}
-
-	public void setFuncaoList(List<SelectItem> funcaoList) {
-		this.funcaoList = funcaoList;
-	}
 }

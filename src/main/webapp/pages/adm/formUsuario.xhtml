@@ -8,15 +8,28 @@
 	<ui:define name="corpo">
 		<h:form id="cadUsuario">
 			<p:panel id="panel" header="#{userController.labelCadastro}">
-							
-				<h:inputHidden value="#{userController.user.id}" />
+
+				<h:inputHidden value="#{userController.usuario.id}" />
 
 				<h:panelGrid columns="3" cellpadding="5">
-						
+				
+					<h:outputLabel for="cliente"
+						value="#{msgs['cadastroUsuario.label.nome']}" />
+
+					<p:selectOneMenu id="cliente"  value="#{userController.comboCliente.selecao}"
+						required="true"
+						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
+						style="width:300px">
+            			<f:selectItems value="#{userController.comboCliente.listaSelecao}" />
+						<p:ajax event="blur" update="nameMsg" />
+					</p:selectOneMenu>
+					<p:message id="nameMsgCombo" for="cliente" />					
+
 					<h:outputLabel for="name"
 						value="#{msgs['cadastroUsuario.label.nome']}" />
 
-					<p:inputText id="name" value="#{userController.user.nome}" required="true"
+					<p:inputText id="name" value="#{userController.usuario.nome}"
+						required="true"
 						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
 						style="width:300px">
 						<f:validateLength minimum="4" />
@@ -24,19 +37,9 @@
 					</p:inputText>
 					<p:message id="nameMsg" for="name" />
 
-					<!-- <h:outputLabel for="cpf"
-						value="#{msgs['cadastroUsuario.label.cpf']}" />
-					<p:inputMask id="cpf" mask="999.999.999-99"
-						value="#{userController.user.cpf}" maxlength="14" required="true"
-						requiredMessage="#{msgs['cadastroUsuario.cpf.required']}"
-						style="width:300px">
-						<p:ajax event="blur" update="idMsg" />
-					</p:inputMask>
-					<p:message id="idMsg" for="cpf" /> -->
-
 					<h:outputLabel for="email"
 						value="#{msgs['cadastroUsuario.label.email']}" />
-					<p:inputText id="email" value="#{userController.user.email}"
+					<p:inputText id="email" value="#{userController.usuario.email}"
 						required="true"
 						requiredMessage="#{msgs['cadastroUsuario.email.required']}"
 						validatorMessage="#{msgs['cadastroUsuario.email.requiredValidator']}"
@@ -47,12 +50,12 @@
 						<p:ajax event="blur" update="emailMsg" />
 					</p:inputText>
 					<p:message id="emailMsg" for="email" />
-					
-					</h:panelGrid>
+
+				</h:panelGrid>
 
 				<p:commandButton id="addUser"
 					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
-					action="#{userController.addUser}" ajax="false" />
+					action="#{userController.salvar}" ajax="false" />
 
 				<p:commandButton id="limpar"
 					value="#{msgs['cadastroUsuario.label.reset']}"

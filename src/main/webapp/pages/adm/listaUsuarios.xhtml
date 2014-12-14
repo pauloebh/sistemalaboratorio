@@ -7,7 +7,7 @@
 <ui:composition template="/pages/template.xhtml">
 	<ui:define name="corpo">
 		<h:form>
-			<p:commandButton action="#{userController.newUser}" type="submit"
+			<p:commandButton action="#{userController.novo}" type="submit"
 						icon="ui-icon ui-icon-document" ajax="false" /> 
 			<p:dataTable id="users" var="user" value="#{userController.userList}"
 				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
@@ -20,23 +20,23 @@
 						<h:outputText value="Name" />
 					</f:facet>
 
-					<h:commandLink value="#{user.nome}"
-						action="#{userController.editUser(user)}">
+					<h:commandLink value="#{usuario.nome}"
+						action="#{userController.editar(user)}">
 					</h:commandLink>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="E-mail" />
 					</f:facet>
-					<h:outputText value="#{user.email}" />
+					<h:outputText value="#{usuario.email}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="" />
 					</f:facet>
-					<p:commandButton action="#{userController.deleteUser(user)}" type="submit"
+					<p:commandButton action="#{userController.deletar(user)}" type="submit"
 						icon="ui-icon ui-icon-trash"
-						onclick="if (!confirm('Confirma a exlucão do usuario #{user.nome} ?')) return false;"
+						onclick="if (!confirm('Confirma a exlucão do usuario #{usuario.nome} ?')) return false;"
 						ajax="false" /> 
 				</p:column>
 				<!-- type="submit"  image="/resources/imagens/excluir16.png"  -->
