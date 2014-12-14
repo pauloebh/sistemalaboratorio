@@ -6,18 +6,17 @@
 
 <ui:composition template="/pages/template.xhtml">
 	<ui:define name="corpo">
-		<h:form id="cadUsuario">
+		<h:form id="cadFuncao">
 			<p:panel id="panel" header="#{funcaoController.labelCadastro}">
 							
 				<h:inputHidden value="#{funcaoController.funcao.id}" />
-
 				<h:panelGrid columns="3" cellpadding="5">
 						
 					<h:outputLabel for="name"
-						value="#{msgs['cadastroUsuario.label.nome']}" />
+						value="#{msgs['padrao.botao.nome']}" />
 
 					<p:inputText id="name" value="#{funcaoController.funcao.nome}" required="true"
-						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
+						requiredMessage="#{msgs['padrao.botao.nome.obrigatorio']}"
 						style="width:300px">
 						<f:validateLength minimum="4" />
 						<p:ajax event="blur" update="nameMsg" />
@@ -25,18 +24,17 @@
 					<p:message id="nameMsg" for="name" />
 
 					<h:outputLabel for="ativo"
-						value="#{msgs['cadastroUsuario.label.cpf']}" />
+						value="#{msgs['padrao.botao.ativo']}" />
 					<p:selectBooleanCheckbox id="ativo"
 						value="#{funcaoController.funcao.ativo}" />
-					
 					</h:panelGrid>
 
 				<p:commandButton id="adicionar"
-					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
+					value="#{msgs['padrao.botao.novo']}" update="panel"
 					action="#{funcaoController.adicionar}" ajax="false" />
 
 				<p:commandButton id="limpar"
-					value="#{msgs['cadastroUsuario.label.reset']}"
+					value="#{msgs['padrao.botao.limpar']}"
 					action="#{funcaoController.limpar}" type="reset" ajax="false" />
 			</p:panel>
 		</h:form>
