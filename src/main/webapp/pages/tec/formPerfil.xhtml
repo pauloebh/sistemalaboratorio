@@ -46,17 +46,29 @@
 						<p:ajax event="blur" update="nameMsg" />
 					</p:selectManyCheckbox>
 					<p:message id="nameMsgCombo" for="funcoes" />
+					
+					<h:inputHidden value="" />
+					<h:inputHidden value="" />
+					<h:inputHidden value="" />
+					<h:inputHidden value="" />
+					
+					<p:commandButton id="limpar"
+						value="#{msgs['cadastroUsuario.label.reset']}"
+						action="#{perfilController.limpar}" type="reset" ajax="false" />
 
 				</h:panelGrid>
 
-				<p:commandButton id="adicionar"
-					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
-					action="#{perfilController.adicionar}" ajax="false" />
+			<p:commandButton id="salvar"
+				value="#{msgs['padrao.botao.salvar']}" update="panel"
+				action="#{perfilController.salvar}" ajax="false" />
+				
 
-				<p:commandButton id="limpar"
-					value="#{msgs['cadastroUsuario.label.reset']}"
-					action="#{perfilController.limpar}" type="reset" ajax="false" />
+			<p:commandButton id="adicionar"
+				value="#{msgs['padrao.botao.voltar']}" update="panel"
+				action="#{perfilController.listar}" ajax="false" />
+				
 			</p:panel>
+		
 		</h:form>
 	</ui:define>
 </ui:composition>
