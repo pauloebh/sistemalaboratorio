@@ -11,11 +11,10 @@
 				<p:messages />
 				<h:inputHidden value="#{perfilController.perfil.id}" />
 
-				<h:panelGrid columns="3" cellpadding="5">
-					
+				<h:panelGrid columns="4" cellpadding="5">
+
 					<h:outputLabel for="name"
 						value="#{msgs['cadastroUsuario.label.nome']}" />
-
 					<p:inputText id="name" value="#{perfilController.perfil.nome}"
 						required="true"
 						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
@@ -23,26 +22,31 @@
 						<f:validateLength minimum="4" />
 						<p:ajax event="blur" update="nameMsg" />
 					</p:inputText>
-					<p:message id="nameMsg" for="name" />
 
-					<h:outputLabel for="ativo"
-						value="#{msgs['cadastroUsuario.label.cpf']}" />
+					<h:outputLabel for="name"
+						value="#{msgs['cadastroUsuario.label.nome']}" />					
 					<p:selectBooleanCheckbox id="ativo"
-						value="#{perfilController.perfil.ativo}" />	
-					<p:message id="nameMsgAtivo" for="ativo" />
+						value="#{perfilController.perfil.ativo}" />
+						
+					<h:inputHidden value="" />					
+					<p:message id="nameMsg" for="name" />
 					
+					<h:inputHidden value="" />
+					<p:message id="nameMsgAtivo" for="ativo" />
+
 					<h:outputLabel for="funcoes"
 						value="#{msgs['cadastroUsuario.label.nome']}" />
 
-					<p:selectManyMenu id="funcoes"  value="#{perfilController.comboFuncoes.selecao}"
-						required="true"
-						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
-						style="width:300px">
-            			<f:selectItems value="#{perfilController.comboFuncoes.listaSelecao}" />
+					<p:selectManyCheckbox id="funcoes"
+						value="#{perfilController.comboFuncoes.selecao}"
+						layout="pageDirection" required="true"
+						requiredMessage="#{msgs['cadastroUsuario.nome.required']}">
+						<f:selectItems
+							value="#{perfilController.comboFuncoes.listaSelecao}" />
 						<p:ajax event="blur" update="nameMsg" />
-					</p:selectManyMenu>
+					</p:selectManyCheckbox>
 					<p:message id="nameMsgCombo" for="funcoes" />
-					
+
 				</h:panelGrid>
 
 				<p:commandButton id="adicionar"
