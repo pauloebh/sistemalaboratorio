@@ -67,8 +67,8 @@ public class Usuario implements Serializable {
 	    )
 	    @JoinTable(
 	        name="Perfil_usuario",
-	        joinColumns=@JoinColumn(name="level_id"),
-	        inverseJoinColumns=@JoinColumn(name="Perfil_id")
+	        joinColumns=@JoinColumn(name="idcliente"),
+	        inverseJoinColumns=@JoinColumn(name="idperfil")
 	    )	
 	private List <Perfil> Perfis;
     
