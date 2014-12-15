@@ -28,6 +28,9 @@ public class Cliente implements Serializable {
 
 	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
+	
+	@Column(name = "alias", nullable = false, length = 50)
+	private String alias;
 
 	@Column(name = "email", unique = true, length = 50)
 	private String email;
@@ -92,6 +95,14 @@ public class Cliente implements Serializable {
 		this.usuarios = usuarios;
 	}
 	
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
 	@Override
 	public String toString() {
 		return getNome();
