@@ -38,13 +38,13 @@ public class ClienteMB extends BaseMB implements Serializable {
 		// se o usuario existir atualiza
 		if (getCliente().getId() != 0) {
 			// selecaoToPerfilEnum(this.user);
-			getClienteService().update(getCliente());
+			getClienteService().atualizar(getCliente());
 			return LISTAR;
 			// valida se existe p/adicionar
 		} else if (!getClienteService().isExiste(getCliente())) {
 
 			// /selecaoToPerfilEnum(this.user);
-			getClienteService().add(getCliente());
+			getClienteService().adicionar(getCliente());
 			return LISTAR;
 		} else {
 			Message.addMessage("cadastroUsuario.existente");
@@ -58,7 +58,7 @@ public class ClienteMB extends BaseMB implements Serializable {
 	}
 
 	public String atualizar(Cliente cliente) {
-		getClienteService().update(cliente);
+		getClienteService().atualizar(cliente);
 		return CRIAR;
 	}
 

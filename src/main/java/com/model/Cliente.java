@@ -29,14 +29,20 @@ public class Cliente implements Serializable {
 	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
 	
-	@Column(name = "alias", nullable = false, length = 50)
 	private String alias;
-
-	@Column(name = "email", unique = true, length = 50)
 	private String email;
+	private String endereco;
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
 	@Column(name = "ativo")
-	private Boolean ativo;
+	private boolean ativo=true;
 
 	@OneToMany(mappedBy = "cliente")
     private Set<Usuario> usuarios;
@@ -46,7 +52,7 @@ public class Cliente implements Serializable {
 		
 	}
 	
-	public boolean getAtivo() {
+	public boolean isAtivo() {
 		return ativo;
 	}
 

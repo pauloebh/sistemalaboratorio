@@ -11,52 +11,94 @@
 				<p:messages />
 				<h:inputHidden value="#{clienteController.cliente.id}" />
 
-				<h:panelGrid columns="3" cellpadding="5">
+				<h:panelGrid columns="3" cellspacing="10">
+					<p:row>
+						<h:outputLabel for="name" value="#{msgs['padrao.label.nome']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="name" value="#{clienteController.cliente.nome}"
+							required="true"
+							requiredMessage="#{msgs['padrao.label.nome.obrigatorio']}"
+							style="width:300px">
+							<f:validateLength minimum="4" />
+							<p:ajax event="blur" update="nameMsg" />
+						</p:inputText>
+						<p:message id="nameMsg" for="name" />
+						
+									</p:row>
+				</h:panelGrid>
 
-					<h:outputLabel for="name"
-						value="#{msgs['cadastroUsuario.label.nome']}" />
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:row>
+					<h:outputLabel for="alias" value="#{msgs['clienteController.cliente.alias']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="alias" value="#{clienteController.cliente.alias}" size="20"
+							required="true" 
+							requiredMessage="#{msgs['clienteController.cliente.alias.obrigatorio']}"
+							style="width:300px">
+							<f:validateLength minimum="4" />
+							<p:ajax event="blur" update="aliasMsg" />
+							<p:spacer width="10" />
+						</p:inputText>
+						<p:message id="aliasMsg" for="alias" />
+					</p:row>
+				</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="10">
+					<p:row>
+						<p:selectBooleanCheckbox id="ativo"
+							value="#{clienteController.cliente.ativo}">
+						</p:selectBooleanCheckbox>
+						<h:outputLabel for="ativo" value="#{msgs['padrao.label.ativo']}" />
+					</p:row>
+				</h:panelGrid>
 
-					<p:inputText id="name" value="#{clienteController.cliente.nome}" required="true"
-						requiredMessage="#{msgs['cadastroUsuario.nome.required']}"
-						style="width:300px">
-						<f:validateLength minimum="4" />
-						<p:ajax event="blur" update="nameMsg" />
-					</p:inputText>
-					<p:message id="nameMsg" for="name" />
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:row>
+						<h:outputLabel for="cpf"
+							value="#{msgs['cadastroCliente.label.cnpjorcpf']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputMask id="cpf" mask="999.999.999-99"
+							value="#{clienteController.cliente.cpfcnpj}" maxlength="14"
+							required="true"
+							requiredMessage="#{msgs['cadastroCliente.cnpjOrCpf.required']}"
+							style="width:300px">
+							<p:ajax event="blur" update="idMsg" />
+						</p:inputMask>
+						<p:message id="idMsg" for="cpf" />
 
-					<h:outputLabel for="cpf"
-						value="#{msgs['cadastroUsuario.label.cpf']}" />
-					<p:inputMask id="cpf" mask="999.999.999-99"
-						value="#{clienteController.cliente.cpfcnpj}" maxlength="14" required="true"
-						requiredMessage="#{msgs['cadastroUsuario.cpf.required']}"
-						style="width:300px">
-						<p:ajax event="blur" update="idMsg" />
-					</p:inputMask>
-					<p:message id="idMsg" for="cpf" />
+						<h:outputLabel for="email"
+							value="#{msgs['cadastroCliente.label.email']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="email" value="#{clienteController.cliente.email}"
+							required="true"
+							requiredMessage="#{msgs['cadastroCliente.email.required']}"
+							validatorMessage="#{msgs['cadastroCliente.email.requiredValidator']}"
+							style="width:300px">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							<f:validateLength minimum="5" />
+							<p:ajax event="blur" update="emailMsg" />
+						</p:inputText>
+						<p:message id="emailMsg" for="email" />
 
-					<h:outputLabel for="email"
-						value="#{msgs['cadastroUsuario.label.email']}" />
-					<p:inputText id="email" value="#{clienteController.cliente.email}"
-						required="true"
-						requiredMessage="#{msgs['cadastroUsuario.email.required']}"
-						validatorMessage="#{msgs['cadastroUsuario.email.requiredValidator']}"
-						style="width:300px">
-						<f:validateRegex
-							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-						<f:validateLength minimum="5" />
-						<p:ajax event="blur" update="emailMsg" />
-					</p:inputText>
-					<p:message id="emailMsg" for="email" />
-					
-					</h:panelGrid>
+						<h:outputLabel for="endereco"
+							value="#{msgs['cadastroCliente.label.endereco']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="endereco"
+							value="#{clienteController.cliente.endereco}" required="true"
+							requiredMessage="#{msgs['cadastroCliente.endereco.obrigatorio']}"
+							style="width:300px;height:100px" >
+							<f:validateLength minimum="4" />
+							<p:ajax event="blur" update="enderecoMsg" />
+						</p:inputText>
+						<p:message id="enderecoMsg" for="endereco" />
 
-				<p:commandButton id="adicionar"
-					value="#{msgs['cadastroUsuario.label.add']}" update="panel"
-					action="#{clienteController.adicionar}" ajax="false" />
+					</p:row>
+				</h:panelGrid>
 
-				<p:commandButton id="limpar"
-					value="#{msgs['cadastroUsuario.label.reset']}"
-					action="#{clienteController.limpar}" type="reset" ajax="false" />
+				<h:panelGrid columns="2" cellspacing="10">
+					<p:commandButton id="adicionar"
+						value="#{msgs['padrao.botao.salvar']}" update="panel"
+						action="#{clienteController.adicionar}" ajax="false" />
+
+					<p:commandButton id="limpar" value="#{msgs['padrao.botao.limpar']}"
+						action="#{clienteController.limpar}" type="reset" ajax="false" />
+				</h:panelGrid>
 			</p:panel>
 		</h:form>
 	</ui:define>

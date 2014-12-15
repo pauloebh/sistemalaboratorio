@@ -26,7 +26,7 @@ public class ClienteService implements Serializable, IClienteService {
 	 */
     @Transactional(readOnly = false)
     @Log
-    public void add(Cliente cliente) {
+    public void adicionar(Cliente cliente) {
         clienteDAO.adicionar(cliente); 		// verifica se existe o ID cadastrado
     }
 
@@ -62,7 +62,7 @@ public class ClienteService implements Serializable, IClienteService {
 	 */
     @Transactional(readOnly = false)
     @Log
-    public void update(Cliente cliente) {
+    public void atualizar(Cliente cliente) {
         clienteDAO.atualizar(cliente);
     }
 
