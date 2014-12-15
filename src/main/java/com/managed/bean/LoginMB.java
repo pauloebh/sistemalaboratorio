@@ -120,7 +120,7 @@ public class LoginMB extends BaseMB implements Serializable {
 			return null;
 		} else {
 			getUsuario().setSenha(getSenhaNova());
-			getUsuarioService().update(getUsuario());
+			getUsuarioService().atualizar(getUsuario());
 			Message.addMessageConfig("login.passw.confirmOk");
 			return "/pages/wellcome.jsf?faces-redirect=true";
 		}

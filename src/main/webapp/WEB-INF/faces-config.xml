@@ -15,21 +15,21 @@
 	
 		<!-- configuration of navigation rules -->	
 	<navigation-rule>
-	    <from-view-id>/pages/adm/formUsuario.xhtml</from-view-id> 
+	    <from-view-id>/pages/adm/formusuario.xhtml</from-view-id> 
 	    <navigation-case>
 	  		<from-outcome>listar</from-outcome>
-            <to-view-id>/pages/adm/listaUsuarios.xhtml</to-view-id>
+            <to-view-id>/pages/adm/listausuarios.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-	    <from-view-id>/pages/adm/listaUsuarios.xhtml</from-view-id> 
+	    <from-view-id>/pages/adm/listausuarios.xhtml</from-view-id> 
 	    <navigation-case>
 	        <from-outcome>editar</from-outcome>
-            <to-view-id>/pages/adm/formUsuario.xhtml</to-view-id>
+            <to-view-id>/pages/adm/formusuario.xhtml</to-view-id>
         </navigation-case>
 	    <navigation-case>
 	        <from-outcome>criar</from-outcome>
-            <to-view-id>/pages/adm/formUsuario.xhtml</to-view-id>
+            <to-view-id>/pages/adm/formusuario.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>	
     
@@ -123,6 +123,10 @@
 	        <converter-id>CpfConverter</converter-id>
 	        <converter-class>com.util.converter.CpfConverter</converter-class>
 	    </converter>
+      <converter>
+      	<converter-id>simpleEntityConverter</converter-id>
+      	<converter-class>com.util.converter.simpleEntityConverter</converter-class>
+      </converter>
  
       <lifecycle>  
          <phase-listener>com.filter.AuthorizationListener</phase-listener>  

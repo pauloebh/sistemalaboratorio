@@ -3,6 +3,7 @@ package com.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "usuario")
@@ -22,7 +23,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idUsuario")
+	@Column(name = "idusuario")
 	private Integer id=0;
 
 	@Column(name = "nome", nullable = false, length = 50)
@@ -31,17 +32,26 @@ public class Usuario implements Serializable {
 	@Column(name = "email", unique = true, length = 50)
 	private String email;
 
-	@Column(name = "senha", length = 200)
 	private String senha;
+	private boolean ativo=true;
+	
+	@Column(name = "contatoprincipal")
+	private boolean contatoPrincipal=true;
 
-	@Column(name = "ativo")
-	private Boolean ativo;
-
-	@Column(name = "contatoPrincipal", nullable = true)
-	private Boolean contatoPrincipal;
-
-    @ManyToOne(optional = true, fetch=FetchType.LAZY)
-    @JoinColumn(name = "idCliente")
+	@Column(name="dddtelcelular")
+	private String  dddTelCelular;
+	
+	@Column(name="telcelular")
+	private String telCelular;
+	
+	@Column(name="dddtelcomercial")
+	private String dddTelComercial;
+	
+	@Column(name="telcomercial")
+	private String telComercial;
+	
+    @ManyToOne(optional = true, fetch=FetchType.EAGER)
+    @JoinColumn(name = "idcliente")
     private Cliente cliente;
 
     //@OneToMany(mappedBy = "usuario")
@@ -50,12 +60,32 @@ public class Usuario implements Serializable {
 	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	//private Set<Perfil> perfis;
     
+    
+    @ManyToMany(
+	        targetEntity=Perfil.class,
+	        cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	    )
+	    @JoinTable(
+	        name="Perfil_usuario",
+	        joinColumns=@JoinColumn(name="level_id"),
+	        inverseJoinColumns=@JoinColumn(name="Perfil_id")
+	    )	
+	private List <Perfil> Perfis;
+    
 
 	public Usuario () {
 		
 	}
 	
-	public boolean getAtivo() {
+	public List<Perfil> getPerfis() {
+		return Perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		Perfis = perfis;
+	}
+	
+	public boolean isAtivo() {
 		return ativo;
 	}
 
@@ -74,7 +104,6 @@ public class Usuario implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -113,21 +142,41 @@ public class Usuario implements Serializable {
 		this.cliente = cliente;
 	}
 
-	/*public List<Log> getLogs() {
-		return logs;
+	public String getDddTelCelular() {
+		return dddTelCelular;
 	}
 
-	public void setLogs(List<Log> logs) {
-		this.logs = logs;
-	}*/
-
-	/*private List<Perfil> getPerfis() {
-		return perfis;
+	public void setDddTelCelular(String dddTelCelular) {
+		this.dddTelCelular = dddTelCelular;
 	}
 
-	private void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
-	}*/
+	public String getTelCelular() {
+		return telCelular;
+	}
+
+	public void setTelCelular(String telCelular) {
+		this.telCelular = telCelular;
+	}
+
+	public String getDddTelComercial() {
+		return dddTelComercial;
+	}
+
+	public void setDddTelComercial(String dddTelComercial) {
+		this.dddTelComercial = dddTelComercial;
+	}
+
+	public String getTelComercial() {
+		return telComercial;
+	}
+
+	public void setTelComercial(String telComercial) {
+		this.telComercial = telComercial;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@Override
 	public String toString() {

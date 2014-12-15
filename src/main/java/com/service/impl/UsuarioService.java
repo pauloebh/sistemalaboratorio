@@ -15,23 +15,29 @@ public class UsuarioService implements Serializable, IUsuarioService {
 
     private static final long serialVersionUID = 1L;
 
-    public IUsuarioDao userDAO;
+    public IUsuarioDao dao;
     
     public UsuarioService () {
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#add(com.model.Usuario)
-	 */
     @Transactional(readOnly = false)
-    public void add(Usuario usuario) {
-        userDAO.adicionar(usuario); 		// verifica se existe o ID cadastrado
+    public void adicionar(Usuario usuario) {
+    	usuario.setSenha(getDefaultPassword(usuario.getEmail()));
+        dao.adicionar(usuario); 		// verifica se existe o ID cadastrado
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#isExiste(com.model.Usuario)
-	 */
-    public boolean isExiste(Usuario usuario) {
+    private String getDefaultPassword(String email) {
+    	   //Senha default  composto pelos 5 primeiros numeros do CPF
+        return email.replace(".","").replace("-", "").substring(0, 5);
+	}
+
+public void resetSenha(Usuario usuario){
+	usuario.setSenha(getDefaultPassword(usuario.getEmail()));
+	dao.atualizar(usuario);
+}
+    
+    
+	public boolean isExiste(Usuario usuario) {
         //Verifica se existe usuario user.getNome()
         if (getByEmail(usuario) != null)
             return true;
@@ -39,58 +45,37 @@ public class UsuarioService implements Serializable, IUsuarioService {
             return false;
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#buscaPorLogin(com.model.Usuario)
-	 */
     public boolean buscaPorLogin(Usuario usuario) {
-        return userDAO.buscaPorLogin(usuario);
+        return dao.buscaPorLogin(usuario);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#recuperar(java.lang.Integer)
-	 */
     public Usuario recuperar(Integer id) {
-        return userDAO.recuperar(id);
+        return dao.recuperar(id);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#delete(com.model.Usuario)
-	 */
     @Transactional(readOnly = false)
     public void delete(Usuario usuario) {
-        userDAO.deletar(usuario);
+        dao.deletar(usuario);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#update(com.model.Usuario)
-	 */
     @Transactional(readOnly = false)
-    public void update(Usuario usuario) {
-        userDAO.atualizar(usuario);
+    public void atualizar(Usuario usuario) {
+        dao.atualizar(usuario);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#getById(com.model.Usuario)
-	 */
     public Usuario getById(Usuario usuario) {
-        return userDAO.recuperar(usuario);
+        return dao.recuperar(usuario);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#getByEmail(com.model.Usuario)
-	 */
     public Usuario getByEmail(Usuario usuario) {
-        return userDAO.recuperarPorEmail(usuario);
+        return dao.recuperarPorEmail(usuario);
     }
 
-    /* (non-Javadoc)
-	 * @see com.service.IUsuarioService#getAll()
-	 */
     public List<Usuario> getAll() {
-        return userDAO.todos();
+        return dao.todos();
     }
 
-    public void setUserDAO(IUsuarioDao userDAO) {
-        this.userDAO = userDAO;
+    public void setUserDAO(IUsuarioDao dao) {
+        this.dao = dao;
     }
 }
