@@ -124,8 +124,8 @@
 	        <converter-class>com.util.converter.CpfConverter</converter-class>
 	    </converter>
       <converter>
-      	<converter-id>simpleEntityConverter</converter-id>
-      	<converter-class>com.util.converter.simpleEntityConverter</converter-class>
+      	<converter-id>SimpleEntityConverter</converter-id>
+      	<converter-class>com.util.converter.SimpleEntityConverter</converter-class>
       </converter>
  
       <lifecycle>  
