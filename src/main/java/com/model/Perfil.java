@@ -21,7 +21,7 @@ public class Perfil implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idPerfil")
+	@Column(name = "idperfil")
 	private Integer id=0;
 
 	@Column(name = "nome", unique=true, nullable = false, length = 50)
