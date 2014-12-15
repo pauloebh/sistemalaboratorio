@@ -9,10 +9,10 @@
 		<h:form>
 		
 			<p:commandButton action="#{clienteController.novo}" type="submit"
-						icon="ui-icon ui-icon-new" ajax="false" /> 
-						
+						icon="ui-icon ui-icon-document" ajax="false" value="#{msgs['padrao.botao.novo']}" /> 
+						<br /><br />
 			<p:dataTable id="clientes" var="cliente" value="#{clienteController.clienteList}"
-				paginator="true" rows="10" style="width: 900px" emptyMessage="Nenhuma registro encontrado">
+				paginator="true" rows="10" style="width: 900px" emptyMessage="#{msgs['padrao.registro.nenhum.encontrado']}">
 					<f:facet name="header">
 					<h:outputText
 						value="#{msgs['cadastroUsuario.label.consulta']}" />

@@ -27,27 +27,32 @@ public class UsuarioMB extends BaseMB implements Serializable {
 	public UsuarioMB(IUsuarioService usuarioService, IClienteService clienteService) {
 		setUserService(usuarioService);
 		setClienteService(clienteService);
-		
 		setComboCliente(new SelectOneDataModel<Cliente>(clienteService.getAll()));
 		
-		setUsuario(new Usuario());
+		 if (this.usuario== null) {
+			 this.usuario = new Usuario();
+	        }
         // montaPerfilList();
     }
 
-    private String getDefaultPassword(String strCpf){
-        //Senha default  composto pelos 5 primeiros numeros do CPF
-        return strCpf.replace(".","").replace("-", "").substring(0, 5);
-    }
-
+  
     public void limpar(){
-    	//falta 
+    	 this.usuario = new Usuario();
     }
-    
+   
     public String novo() {
-    	if (getUsuario() == null)
-    		setUsuario(new Usuario());
+   /* 	if (getUsuario() == null)
+    		setUsuario(new Usuario());*/
     		return CRIAR;
     }
+    
+    
+    public void resetSenha(){
+    	getUserService().resetSenha( getUsuario());
+    	 Message.addMessage("cadastroUsuario.botao.reset.mensagem");
+    	//adicionar o envio  e-mail
+    }
+    
     
     public String salvar() {
 	
@@ -56,17 +61,15 @@ public class UsuarioMB extends BaseMB implements Serializable {
         // se o usuario existir atualiza
         if (getUsuario().getId() != 0) {
             // selecaoToPerfilEnum(this.user);
-            getUserService().update(getUsuario());
+        	
+            getUserService().atualizar(usuario);
             return LISTAR;
+            
             // valida se existe p/adicionar
-        } else if (!getUserService().isExiste(getUsuario())) {
+        } else if (!getUserService().isExiste(usuario)) {
 
-            if (getUsuario().getSenha() == null) {
-                getUsuario().setSenha(getDefaultPassword(getUsuario().getEmail()));
-            }
-
-            // /selecaoToPerfilEnum(this.user);
-            getUserService().add(getUsuario());
+        	// /selecaoToPerfilEnum(this.user);
+            getUserService().adicionar(getUsuario());
             return LISTAR;
         } else {
             Message.addMessage("cadastroUsuario.existente");
@@ -80,12 +83,11 @@ public class UsuarioMB extends BaseMB implements Serializable {
     }
 
     public String atualizar(Usuario usuario) {
-        getUserService().update(usuario);
+        getUserService().atualizar(usuario);
         return CRIAR;
     }
 
-    public String editar(Usuario usuario) {
-        setUsuario(usuario);
+    public String editar() {
         //getComboCliente().setSelecao(usuario.getCliente().getNome());
         return EDITAR;
     }
@@ -110,7 +112,7 @@ public class UsuarioMB extends BaseMB implements Serializable {
     public Usuario getUsuario() {
         return this.usuario;
     }
-
+ 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

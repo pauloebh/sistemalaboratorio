@@ -1,0 +1,144 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/pages/template.xhtml">
+	<ui:define name="corpo">
+		<h:form id="cadUsuario">
+			<p:panel id="panel" header="#{userController.labelCadastro}">
+				<h:inputHidden value="#{userController.usuario.id}" />
+
+				<h:panelGrid columns="8" cellspacing="10">
+					<p:row>
+						<h:outputLabel for="cliente"
+							value="#{msgs['cadastroUsuario.label.empresa']}#{msgs['padrao.label.doispontos']}" />
+						<p:selectOneMenu id="cliente" converter="simpleEntityConverter"
+							value="#{userController.usuario.cliente}" required="true"
+							requiredMessage="#{msgs['cadastroUsuario.empresa.obrigatorio']}"
+							style="width:300px">
+							<f:selectItems
+								value="#{userController.comboCliente.listaSelecao}" />
+							<p:ajax event="blur" update="nameMsg" />
+						</p:selectOneMenu>
+						<p:spacer width="10" />
+						<p:selectBooleanCheckbox id="ativo"
+							value="#{userController.usuario.contatoPrincipal}">
+						</p:selectBooleanCheckbox>
+						<h:outputLabel for="ativo"
+							value="#{msgs['cadastroUsuario.label.contatoprincipal']}" />
+					</p:row>
+				</h:panelGrid>
+
+				<h:panelGrid columns="4" cellspacing="10">
+					<p:row>
+						<p:message id="nameMsgCombo" for="cliente" />
+						<h:outputLabel for="name"
+							value="#{msgs['padrao.label.nome']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="name" value="#{userController.usuario.nome}"
+							required="true"
+							requiredMessage="#{msgs['padrao.label.nome.obrigatorio']}"
+							style="width:300px">
+							<f:validateLength minimum="4" />
+							<p:ajax event="blur" update="nameMsg" />
+						</p:inputText>
+						<p:message id="nameMsg" for="name" />
+					</p:row>
+				</h:panelGrid>
+
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:row>
+						<h:outputLabel
+							value="#{msgs['cadastroUsuario.label.telefone.celular']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputMask id="dddCelular" maxlength="2" mask="99"
+							value="#{userController.usuario.dddTelCelular}" size="2"
+							required="true"
+							requiredMessage="#{msgs['cadastroUsuario.dddCelular.obrigatorio']}">
+							<f:validateLength minimum="2" maximum="2" />
+						</p:inputMask>
+						<p:spacer width="10" />
+						<p:inputMask id="telefoneCelular" maxlength="10" mask="99999-9999"
+							value="#{userController.usuario.telCelular}" size="10"
+							required="true"
+							requiredMessage="#{msgs['cadastroUsuario.celular.obrigatorio']}">
+							<f:validateLength minimum="10" maximum="10" />
+						</p:inputMask>
+						<p:message id="dddCelularMsg" for="dddCelular" />
+						<p:message id="telefoneCelularMsg" for="telefoneCelular" />
+					</p:row>
+				</h:panelGrid>
+
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:row>
+						<h:outputLabel
+							value="#{msgs['cadastroUsuario.label.telefone.comercial']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputMask id="dddComercial" maxlength="2" mask="99"
+							value="#{userController.usuario.dddTelComercial}" size="2"
+							required="true"
+							requiredMessage="#{msgs['cadastroUsuario.dddComercial.obrigatorio']}">
+							<f:validateLength minimum="2" maximum="2" />
+						</p:inputMask>
+						<p:spacer width="10" />
+						<p:inputMask id="telefoneComercial" maxlength="10"
+							mask="99999-9999" value="#{userController.usuario.telComercial}"
+							size="10" required="true"
+							requiredMessage="#{msgs['cadastroUsuario.comercial.obrigatorio']}">
+							<f:validateLength minimum="10" maximum="10" />
+						</p:inputMask>
+						<p:message id="dddComercialMsg" for="dddComercial" />
+						<p:message id="telefoneComercialMsg" for="telefoneComercial" />
+					</p:row>
+				</h:panelGrid>
+
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:row>
+						<h:outputLabel for="email"
+							value="#{msgs['cadastroUsuario.label.email']}#{msgs['padrao.label.doispontos']}" />
+						<p:inputText id="email" value="#{userController.usuario.email}"
+							required="true"
+							requiredMessage="#{msgs['cadastroUsuario.email.required']}"
+							validatorMessage="#{msgs['cadastroUsuario.email.requiredValidator']}"
+							style="width:300px">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							<f:validateLength minimum="5" />
+							<p:ajax event="blur" update="emailMsg" />
+						</p:inputText>
+						<p:message id="emailMsg" for="email" />
+					</p:row>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputLabel
+						value="#{msgs['cadastroUsuario.label.senha']}#{msgs['padrao.label.doispontos']}" />
+ 
+					<p:commandButton value="#{msgs['cadastroUsuario.botao.reset']}"
+						id="reset" update="panel" 
+						actionListener="#{userController.resetSenha}"
+						oncomplete="resetPassword()"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" cellspacing="10">
+					<p:commandButton id="adicionar"
+						value="#{msgs['padrao.botao.salvar']}" update="panel"
+						action="#{userController.salvar}" ajax="false" />
+
+					<p:commandButton id="limpar" value="#{msgs['padrao.botao.limpar']}"
+						action="#{userController.limpar}" type="reset" ajax="false" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+		<script type="text/javascript">
+                function resetPassword()) {
+                        alert("#{msgs['cadastroUsuario.botao.reset.mensagem']}");
+                    }
+                }
+            </script>
+
+	</ui:define>
+</ui:composition>
+</html>
