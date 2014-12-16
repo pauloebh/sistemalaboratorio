@@ -1,9 +1,9 @@
 package com.managed.bean;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.List;
-
+ 
 import com.model.Funcao;
 import com.service.IFuncaoService;
 import com.util.Message;
