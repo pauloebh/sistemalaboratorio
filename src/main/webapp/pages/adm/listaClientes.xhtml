@@ -15,11 +15,11 @@
 				paginator="true" rows="10" style="width: 900px" emptyMessage="#{msgs['padrao.registro.nenhum.encontrado']}">
 					<f:facet name="header">
 					<h:outputText
-						value="#{msgs['cadastroUsuario.label.consulta']}" />
+						value="#{msgs['cliente.consulta.cabecalho']}" />
 					</f:facet>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Name" />
+						<h:outputText value="#{msgs['cliente.consulta.colunaNome']}" />
 					</f:facet>
 
 					<h:commandLink value="#{cliente.nome}"
@@ -28,13 +28,13 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="CPF/CNPJ" />
+						<h:outputText value="#{msgs['cliente.consulta.colunaCNPJ']}" />
 					</f:facet>
 					<h:outputText value="#{cliente.cpfcnpj}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="E-mail" />
+						<h:outputText value="#{msgs['cliente.consulta.colunaEmail']}" />
 					</f:facet>
 					<h:outputText value="#{cliente.email}" />
 				</p:column>

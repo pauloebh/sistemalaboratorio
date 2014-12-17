@@ -73,10 +73,10 @@ public class ClienteMB extends BaseMB implements Serializable {
 
 	public String getLabelCadastro() {
 		if (getCliente().getId() == 0) {
-			return Message.getBundleMessage("cadastroUsuario.label.titulo");
+			return Message.getBundleMessage("cliente.form.cabecalho.cadastrar");
 		} else {
 			return Message
-					.getBundleMessage("cadastroUsuario.label.alteraUsuario");
+					.getBundleMessage("cliente.form.cabecalho.alterar");
 		}
 	}
 
